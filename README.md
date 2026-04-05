@@ -131,18 +131,6 @@ See [.bub Format Reference](Assets/Scripts/BubbleSpinner/Docs/FORMAT.md) for the
 ### Project
 - [Project Structure](Docs/Project_Structure.md) — Full folder and file map
 
-### Scene Setup
-- [Scene Overview](Docs/Scenes_Setup/Scene_Overview.md) — Build settings, scene order, and per-scene summary
-- [00_Disclaimer Setup](Docs/Scenes_Setup/00_Disclaimer_Setup.md) — First-launch TOS flow
-- [01_Bootstrap Setup](Docs/Scenes_Setup/01_Bootstrap_Setup.md) — Core manager initialization
-- [02_Lockscreen Setup](Docs/Scenes_Setup/02_Lockscreen_Setup.md) — Lock screen entry point
-- [03_PhoneScreen Setup](Docs/Scenes_Setup/03_PhoneScreen_Setup.md) — Gallery, contacts, navigation, home screen
-- [04_ChatApp Setup](Docs/Scenes_Setup/04_ChatApp_Setup.md) — Chat UI, message spawning, timing, scroll
-
-### BubbleSpinner
-- [BubbleSpinner Code Reference](Assets/Scripts/BubbleSpinner/Docs/BubbleSpinner.md) — Full script documentation
-- [.bub Format Reference](Assets/Scripts/BubbleSpinner/Docs/FORMAT.md) — Complete `.bub` syntax guide
-
 ---
 
 ## Goals
