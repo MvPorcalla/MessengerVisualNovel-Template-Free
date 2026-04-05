@@ -8,6 +8,9 @@
 
 You should already see your existing groups. Do not touch them.
 
+> **Tip:** Drag the Addressables Groups tab next to the Inspector for easy side-by-side access.
+> To keep the layout: **Window → Layouts → Save Layout**
+
 ---
 
 ## Step 2 — Create a Group for the Character
