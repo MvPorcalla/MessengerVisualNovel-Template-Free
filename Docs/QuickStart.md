@@ -8,7 +8,7 @@ Follow these steps to add a new character and test them in Play Mode.
 ## Before You Start
 
 CG images use Addressables. If you haven't set that up yet, do that first:
-→ [Addressables Setup Guide](Addressables_Setup.md)
+→ [Addressables Setup Guide](Docs\Addressable_Setup.md)
 
 ---
 
