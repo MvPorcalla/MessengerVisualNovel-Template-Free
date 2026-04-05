@@ -1,21 +1,51 @@
-MIT License
+# License
 
 Copyright (c) 2025 MvPorcalla
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+---
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## ChatSim Template
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+The ChatSim template — including all UI systems, scene structure, save system,
+and supporting code outside of the BubbleSpinner module — is free to use for
+personal and commercial projects.
+
+You are free to:
+- Use this template to build and ship your own games, including commercial releases
+- Modify it to suit your project
+- Build and sell games made with it
+
+You may NOT:
+- Resell or redistribute this template as-is
+- Repackage it as an asset pack, starter kit, boilerplate, or tool for others
+- Claim it as your own original work
+
+---
+
+## BubbleSpinner Dialogue Engine
+
+The BubbleSpinner module — including the parser, executor, conversation manager,
+data structures, and related files under Assets/Scripts/BubbleSpinner/ — is free
+to use in your own projects, including commercial games.
+
+You are free to:
+- Use BubbleSpinner in personal and commercial projects
+- Modify it as needed for your game
+
+You may NOT:
+- Redistribute BubbleSpinner in any form as a standalone tool, plugin, or package
+- Include BubbleSpinner in any asset pack, template, or toolkit distributed to others
+- Resell or repackage BubbleSpinner in any form intended for developers
+- Claim authorship of BubbleSpinner
+
+Note:
+Redistribution as part of a compiled game build is allowed.
+
+---
+
+## General
+
+Both components are provided as-is with no warranty of any kind.
+The author is not liable for any damages arising from the use of this software.
+
+For questions about licensing, contact: [Your Contact or GitHub URL](https://github.com/MvPorcalla)
