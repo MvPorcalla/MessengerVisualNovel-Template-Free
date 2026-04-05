@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b03c69e82a37d844ae8f2c39758accd, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  swipeThreshold: 300
+  fadeSwipeRange: 400
+  maxIndividualNotifications: 3
+  timeFormat: 0
+  dateFormat: 0
+  galleryMinZoom: 1
+  galleryMaxZoom: 3
+  galleryZoomSpeed: 0.001
+  galleryDoubleTapZoom: 2
+  galleryDoubleTapTime: 0.3
+  galleryFadeDuration: 0.3
+  bottomThreshold: 0.01
+  messageDelay: 1.2
+  typingIndicatorDuration: 1.5
+  playerMessageDelay: 0.3
+  finalDelayBeforeChoices: 0.2
+  fastModeSpeed: 0.1
+  bubbleMaxWidth: 650
+  bubbleMinWidth: 40
+  bubbleWidthChangeThreshold: 0.1
+  minZoom: 1
+  maxZoom: 3
+  zoomSpeed: 0.001
+  cgViewerFadeDuration: 0.3
+  bootstrapDebugLogs: 1
+  saveManagerDebugLogs: 1
+  lockScreenDebugLogs: 0
+  chatAppDebugLogs: 0
+  chatAutoScrollerDebugLogs: 0
+  chatChoiceSpawnerDebugLogs: 0
+  chatMessageSpawnerDebugLogs: 0
+  chatTimingControllerDebugLogs: 0
+  imageMessageBubbleDebugLogs: 0
+  contactChatListDebugLogs: 0
+  chatAppNavButtonsDebugLogs: 0
+  poolingManagerDebugLogs: 0
+  contactsAppDebugLogs: 0
+  galleryAppDebugLogs: 0
+  settingsPanelDebugLogs: 0
+  homeScreenDebugLogs: 0

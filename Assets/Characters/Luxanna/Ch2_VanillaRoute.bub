@@ -1,0 +1,110 @@
+contact: Luxanna
+chapter: Ch2_VanillaRoute
+
+title: Start
+---
+System: 9:45 PM – Next evening
+
+Luxanna: "hey babe..."
+Luxanna: "honestly i couldn't stop thinking about what you said last night 😊"
+Luxanna: "it made me feel really wanted. thank you for that."
+
+Player: "I meant every word, Lux."
+Player: "Only you."
+
+Luxanna: "good."
+Luxanna: "because I only want you too ❤️"
+
+Luxanna: "[Image 1]"
+// >> media npc type:image unlock:true path:
+
+Luxanna: "set up a little virtual date for us tonight~"
+Luxanna: "just you and me. no work talk allowed. 😌"
+
+Player: "That sounds perfect. I needed this."
+
+Luxanna: "me too. tell me what you’re wearing right now..."
+Luxanna: "i want to picture you here with me."
+
+Luxanna: "i miss your voice so much it’s actually crazy..."
+
+Player: "Me too.."
+
+<<jump Morning>>
+
+---
+
+title: Morning
+---
+System: "8:30 AM – The next morning"
+
+Luxanna: "[Image 2]"
+// >> media npc type:image unlock:true path:
+
+Luxanna: "morning ❤️"
+Luxanna: "literally woke up thinking about you. how'd you sleep?"
+
+Player: "Not bad... but it would've been better if you were here."
+
+Luxanna: "same. these late nights are killing me."
+Luxanna: "i’m trying to smash through this to-do list so i can finally take a weekend off. i need a break so bad."
+
+Luxanna: "[Image 3]"
+// >> media npc type:image unlock:true path:
+
+Luxanna: "look at me..."
+Luxanna: "this is the girl who only has eyes for you. no one else."
+
+Player: "You’re so beautiful, Lux. Seriously."
+
+Luxanna: "you always make me feel that way, even when I’m a stressed-out mess from the office."
+Luxanna: "sometimes i just close my eyes and imagine a real date."
+Luxanna: "walking around the city, holding hands... then eventually going back to your place."
+
+Luxanna: "[Image 4]"
+// >> media npc type:image unlock:true path:
+
+Luxanna: "would you rather just cuddle and watch a movie..."
+Luxanna: "or skip straight to the part where you pin me against the wall? 😏"
+
+Player: "Both. Definitely both."
+
+Luxanna: "hehe i like the way you think."
+Luxanna: "i’ve been staring at my calendar... it’s tight, but i think i can squeeze in a visit two weeks from now."
+Luxanna: "even if i have to bring my laptop and work remotely a bit. i just need to see you."
+
+>> choice
+    -> "Let's make it special."
+        <<jump Romantic>>
+
+    -> "I can't wait."
+        <<jump Intimate>>
+>> endchoice
+
+---
+
+title: Romantic
+---
+Player: “Let’s make it special. I’ll plan everything – dinner, flowers, the works. I want you to feel completely loved.”
+
+Luxanna: "aww... you’re making my heart melt right now 🥰"
+Luxanna: "flowers and dinner? you're gonna make me cry lol."
+Luxanna: "i'm really looking forward to this. let's keep talking every night until then, okay?"
+Luxanna: "goodnight babe... dream of me ❤️"
+
+<<jump chapter:Ch3_VanillaEnd node:Start_PureVanilla>>
+
+---
+
+title: Intimate
+---
+Player: “I can’t wait. Let’s not waste any time… I want you the second you walk through the door 😈”
+
+Luxanna: "whoa... okay, now i'm definitely not going to be able to sleep 😳😈"
+Luxanna: "you better back up that talk when i get there."
+Luxanna: "i'm counting down the days. talk to you tomorrow?"
+Luxanna: "goodnight babe... try to behave ❤️"
+
+<<jump chapter:Ch3_VanillaEnd node:Start_PureVanilla>>
+
+---

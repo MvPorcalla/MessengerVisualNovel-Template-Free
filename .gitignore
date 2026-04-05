@@ -1,0 +1,100 @@
+# =============== #
+# Unity generated #
+# =============== #
+**/Library/
+**/Temp/
+**/Obj/
+**/Build/
+**/Builds/
+**/Logs/
+**/MemoryCaptures/
+**/UserSettings/
+
+# =============== #
+# Keep .meta files (CRITICAL) #
+# =============== #
+!**/Assets/**/*.meta
+!**/Packages/**/*.meta
+
+# Optional: Track ProjectSettings .meta ONLY if you customize them
+# !**/ProjectSettings/**/*.meta
+
+# =============== #
+# IDEs and Editors #
+# =============== #
+.vscode/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.VC.VC.opendb
+*.dotCover
+*.sln.iml
+
+# =============== #
+# OS generated #
+# =============== #
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# =============== #
+# Build Artifacts #
+# =============== #
+/Build/
+/Builds/
+*.apk
+*.aab
+*.ipa
+*.app
+*.xcodeproj/
+*.xcworkspace/
+*.symlinks
+
+# Addressables (uncomment if used)
+/AssetBundles/
+
+# =============== #
+# Package Cache #
+# =============== #
+**/PackageCache/
+**/Packages/manifest.json.bak
+**/Packages/packages-lock.json.bak
+
+# =============== #
+# Logs & Temp #
+# =============== #
+*.log
+*.dmp
+*.stackdump
+*.orig
+*.diff
+*.tmp
+*.cache
+*.manifest
+*.unitypackage
+*.prefab.bak
+*.anim.bak

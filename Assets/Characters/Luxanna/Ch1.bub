@@ -1,0 +1,114 @@
+contact: Luxanna
+chapter: Ch1
+
+title: Start
+---
+System: "8:17 PM"
+
+Luxanna: "hey you 😊"
+Luxanna: "just survived another strategy meeting that could have been an email. how's your night?"
+
+Player: "Hey Lux! sounds like a nightmare lol."
+Player: "I’m good, just chillin... actually was just thinking about you."
+
+Luxanna: "aww, stop. that’s sweet ❤️"
+Luxanna: "since the promotion, i’ve basically been living at my desk. barely have time to breathe."
+Luxanna: "but seeing your name pop up is the highlight of my day, honestly."
+
+Player: "I miss you. It’s been weeks since we actually hung out in person."
+
+Luxanna: "ugh, don’t remind me... the distance is bad enough without my schedule being a mess."
+
+Luxanna: "[Image 1]"
+// >> media npc type:image unlock:true path:
+
+Luxanna: "This is me rn... pretending I’m not dead inside 😂 What do you think?"
+
+Player: "Honestly? You look incredible."
+Player: "That blouse is dangerous, Lux."
+
+Luxanna: "hehe dangerous? 😏"
+Luxanna: "i just got it. feels a little tight around the chest though..."
+
+Luxanna: "[Image 2]"
+// >> media npc type:image unlock:true path:
+
+Luxanna: "be real with me... is the skirt too much for the office? or just right? 😉"
+
+Player: "Just right. Definitely just right."
+
+Luxanna: "good answer~"
+Luxanna: "you always know exactly how to make me blush at work."
+
+Luxanna: "[Image 3]"
+// >> media npc type:image unlock:true path:
+
+Luxanna: "found this filter and immediately thought of you lol"
+
+Player: "Haha you’re killing me over here."
+
+Luxanna: "good."
+Luxanna: "i want you thinking about me as much as i'm thinking about you."
+Luxanna: "...hey. can i be real for a second?"
+
+Player: "Always. What's up?"
+
+Luxanna: "it’s been a month since we actually touched."
+Luxanna: "i miss the physical stuff so much it actually hurts sometimes. just... your hands, your voice right next to me, the way you pull me close."
+Luxanna: "the distance and the overtime... i just get so lonely at night."
+
+Player: "I feel the exact same way. It’s tough."
+
+Luxanna: "yeah?"
+Luxanna: "sometimes i just lie in bed and replay the last time we were together. it’s starting to not be enough anymore."
+
+Luxanna: "[Image 4]"
+// >> media npc type:image unlock:true path:
+
+Luxanna: "this is me right now... wishing you were here instead of 4 hours away."
+
+Player: "God, I wish I could be there too."
+
+Luxanna: "me too... but the work just keeps piling up. i can't even get a weekend off yet."
+Luxanna: "there’s this guy at work... Mark. he’s been super nice lately."
+Luxanna: "brings me coffee, stays late to help with my reports. he’s flirty, but he’s respectful about it."
+Luxanna: "i haven’t done anything, i promise. but... it made me think."
+
+Luxanna: "[Image 5]"
+// >> media npc type:image unlock:true path:
+
+Luxanna: "i'm not gonna lie... the idea of someone actually here touching me is starting to sound tempting when i'm this frustrated and missing you."
+
+Luxanna: "so... i need to know where your head is at, babe. how do you want this to go?"
+
+>> choice
+    -> "I only want you." <<jump VanillaRoute>>
+    -> "Tell me more about..." <<jump SecretBranch>>
+>> endchoice
+---
+
+title: VanillaRoute
+---
+Player: "I only want you. Let’s keep it just us… maybe we plan something special soon?"
+
+Luxanna: "whoa... okay, my heart is actually racing now 😳"
+Luxanna: "i think i just needed to hear you say that. i don't want anyone else either."
+Luxanna: "i'm yours first, always. no matter how many coffees mark brings me lol."
+Luxanna: "let’s talk more tomorrow night? i need to just... process how much i miss you ❤️"
+
+<<jump chapter:Ch2_VanillaRoute>>
+
+---
+
+title: SecretBranch
+---
+Player:"Tell me more about Mark… if you want to explore that, I’m open… as long as you tell me everything."
+
+Luxanna: "whoa... okay, my heart is actually racing now 😳"
+Luxanna: "i didn't expect you to say that. my stomach just did a literal flip."
+Luxanna: "i'm still yours first, always... but the fact that you're okay with this..."
+Luxanna: "let’s talk more tomorrow night? i need to process this and... maybe tell you more about him ❤️"
+
+<<jump chapter:Ch2_SecretBranch>>
+
+---
