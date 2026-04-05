@@ -26,12 +26,12 @@ Fill in the Inspector:
 
 ```
 [Required]
-characterName  → "Sofia"
+characterName  → "Luxanna"
 profileImage   → Addressable sprite reference
 chapters       → drag your .bub file here
 
 [CG Gallery]
-cgAddressableKeys → "Sofia/CG1", "Sofia/CG2"  (Addressable keys for each CG)
+cgAddressableKeys → "Luxanna/CG1", "Luxanna/CG2"  (Addressable keys for each CG)
 
 [Optional Profile]
 characterAge       → "24"
@@ -54,12 +54,12 @@ Create a new text file, give it a `.bub` extension, and assign it to the `chapte
 Minimal working example:
 
 ```
-contact: Sofia
+contact: Luxanna
 
 title: Start
 ---
-Sofia: "Hey, are you there?"
-Sofia: "I need to talk to you."
+Luxanna: "Hey, are you there?"
+Luxanna: "I need to talk to you."
 
 -> ...
 
@@ -78,7 +78,7 @@ Player: "..."
 
 title: Node_Concern
 ---
-Sofia: "It's nothing. Never mind."
+Luxanna: "It's nothing. Never mind."
 
 <<jump EndNode>>
 
@@ -86,7 +86,7 @@ Sofia: "It's nothing. Never mind."
 
 title: Node_Dismiss
 ---
-Sofia: "Fine."
+Luxanna: "Fine."
 
 <<jump EndNode>>
 
@@ -94,7 +94,7 @@ Sofia: "Fine."
 
 title: EndNode
 ---
-Sofia: "Talk later."
+Luxanna: "Talk later."
 ```
 
 See [.bub Format Reference](../Assets/Scripts/BubbleSpinner/Docs/FORMAT.md) for the full syntax guide.

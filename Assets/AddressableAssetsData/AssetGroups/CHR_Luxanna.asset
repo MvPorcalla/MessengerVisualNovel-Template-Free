@@ -16,7 +16,12 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 5b31ec60e8ca47943b6219093ab86536
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 3cd9583f12e88a144953519981ab60cf
+    m_Address: Assets/Characters/Luxanna/frieren.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2009bf9a7a267e84d94a19246ef479cd, type: 2}
   m_SchemaSet:

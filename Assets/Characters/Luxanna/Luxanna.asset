@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Luxanna
   profileImage:
-    m_AssetGUID: 
+    m_AssetGUID: 3cd9583f12e88a144953519981ab60cf
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
