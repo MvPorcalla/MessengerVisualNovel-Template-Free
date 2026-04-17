@@ -189,11 +189,13 @@ namespace BubbleSpinner.Data
     public class ChoiceBlock
     {
         public List<ChoiceData> choices;
+        public string blockId;
         public int pauseIndex = -1;     // message index where this choice block pauses
 
         public ChoiceBlock()
         {
             choices = new List<ChoiceData>();
+            blockId = "";
         }
 
         public ChoiceBlock(int pauseAtIndex) : this()
@@ -328,7 +330,7 @@ namespace BubbleSpinner.Data
     [Serializable]
     public class ConversationState
     {
-        public const int CURRENT_VERSION = 3;   // bumped — JumpTarget replaces nextNode/targetNode strings
+        public const int CURRENT_VERSION = 4;   // bumped — tracks resolved choice blocks for fall-through branches
 
         public int version = CURRENT_VERSION;
         public string conversationId;
@@ -339,6 +341,7 @@ namespace BubbleSpinner.Data
         public bool isInPauseState;
         public ResumeTarget resumeTarget;
         public List<string> readMessageIds;
+        public List<string> resolvedChoiceBlockIds;
         public List<MessageData> messageHistory;
         public List<string> unlockedCGs;
 
@@ -356,6 +359,7 @@ namespace BubbleSpinner.Data
             isInPauseState      = false;
             resumeTarget        = ResumeTarget.None;
             readMessageIds      = new List<string>();
+            resolvedChoiceBlockIds = new List<string>();
             messageHistory      = new List<MessageData>();
             unlockedCGs         = new List<string>();
         }

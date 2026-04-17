@@ -372,7 +372,13 @@ namespace ChatSim.Core
             existing.currentNodeName = "";
             existing.currentMessageIndex = 0;
             existing.isInPauseState = false;
+            existing.resumeTarget = ResumeTarget.None;
+            existing.readMessageIds ??= new System.Collections.Generic.List<string>();
+            existing.resolvedChoiceBlockIds ??= new System.Collections.Generic.List<string>();
+            existing.messageHistory ??= new System.Collections.Generic.List<MessageData>();
+            existing.unlockedCGs ??= new System.Collections.Generic.List<string>();
             existing.readMessageIds.Clear();
+            existing.resolvedChoiceBlockIds.Clear();
             existing.messageHistory.Clear();
             existing.unlockedCGs.Clear();
             existing.version = ConversationState.CURRENT_VERSION;
@@ -423,7 +429,12 @@ namespace ChatSim.Core
                 state.currentMessageIndex = 0;
                 state.isInPauseState      = false;
                 state.resumeTarget        = ResumeTarget.None;
+                state.readMessageIds ??= new System.Collections.Generic.List<string>();
+                state.resolvedChoiceBlockIds ??= new System.Collections.Generic.List<string>();
+                state.messageHistory ??= new System.Collections.Generic.List<MessageData>();
+                state.unlockedCGs ??= new System.Collections.Generic.List<string>();
                 state.readMessageIds.Clear();
+                state.resolvedChoiceBlockIds.Clear();
                 state.messageHistory.Clear();
                 state.unlockedCGs.Clear();
                 state.version             = ConversationState.CURRENT_VERSION;

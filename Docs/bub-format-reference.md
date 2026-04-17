@@ -219,6 +219,11 @@ add a Player: line at indent 2 below the option.
 -> "Unappreciated?"
 ```
 
+Runtime behavior:
+- After the player selects a fall-through option, that choice block is considered consumed
+- Execution continues with the next message in the node after the `>> endchoice`
+- Multiple sequential choice blocks in the same node are supported and resolve in order
+
 ---
 
 ### Pre-jump dialogue inside a choice option

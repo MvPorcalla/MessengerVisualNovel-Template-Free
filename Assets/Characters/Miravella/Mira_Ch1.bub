@@ -35,6 +35,30 @@ Player: "test"
 
 Player: "End Test"
 
+Mira: "make another test"
+Player: "ok"
+
+// temporary test
+>> choice
+    -> "second test"
+        Player: "second test ni mira"
+        Player: "ywowooww"
+
+        Mira: "piwpiw" 
+        Player: "wiwiwiw" 
+    
+    -> "Blah blah"
+        Player: "balh blah"
+        Player: "yada yada"
+
+        Mira: "blah blah" 
+        Player: "yada yada" 
+>> endchoice
+
+Mira: "Is it done?"
+
+Player: "Test dont"
+
 Mira: "I missed you. It’s been months."
 Mira: "Just finished work. I’m exhausted."
 Mira: "Wait, hold on."
@@ -82,25 +106,23 @@ Mira: "…i don't like that you're that far"
 
 System: "jumping node"
 
-<<jump Ch1_N1_Mentor>>
-
-// >> choice
-//     -> "it's just temporary"
-//         Player: "it's just temporary, i'll be back before you know it"
-//         Mira: "you better"
-//         Mira: "i'm holding onto that"
-//         <<jump Ch1_N1_Mentor>>
-//     -> "you don't trust me?"
-//         Player: "what, you don't trust me alone with ghosts?"
-//         Mira: "wow so funny"
-//         Mira: "i hope they haunt you properly"
-//         <<jump Ch1_N1_Mentor>>
-//     -> "i'll get used to it"
-//         Player: "i'll get used to it"
-//         Mira: "…yeah"
-//         Mira: "i guess you will"
-//         <<jump Ch1_N1_Mentor>>
-// >> endchoice
+>> choice
+    -> "it's just temporary"
+        Player: "it's just temporary, i'll be back before you know it"
+        Mira: "you better"
+        Mira: "i'm holding onto that"
+        <<jump Ch1_N1_Mentor>>
+    -> "you don't trust me?"
+        Player: "what, you don't trust me alone with ghosts?"
+        Mira: "wow so funny"
+        Mira: "i hope they haunt you properly"
+        <<jump Ch1_N1_Mentor>>
+    -> "i'll get used to it"
+        Player: "i'll get used to it"
+        Mira: "…yeah"
+        Mira: "i guess you will"
+        <<jump Ch1_N1_Mentor>>
+>> endchoice
 ---
 
 title: Ch1_N1_Mentor
@@ -581,6 +603,4 @@ Mira: "i’m serious"
 Mira: good night, xoxo
 
 <<jump chapter:MiraCh2>>
-
->> END
 ---

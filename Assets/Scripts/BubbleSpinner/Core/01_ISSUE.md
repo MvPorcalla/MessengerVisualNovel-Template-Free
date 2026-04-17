@@ -2,25 +2,49 @@
 
 
 Logs:
-[ConversationManager] Starting conversation: Miravella (ID: 939878_Mira)
-[GameEvents] Game loaded
-[BubbleSpinnerBridge] SaveData loaded into cache
-[DialogueExecutor] No chapter ID in state, defaulting to 'Ch1'
-[BubbleSpinner] Parsing: Mira_Ch1
-[BubbleSpinner] [Mira_Ch1] contact: mismatch! File says 'Mira' but asset expects 'Miravella'
-[BubbleSpinner] [Mira_Ch1] chapter: 'Ch1'
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:20] Opened choice block in node 'Ch1_N1_Start' at pauseIndex 3
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:21] Parsed choice option 'i was trying to make it work too' in node 'Ch1_N1_Start'
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:28] Added choice 'i was trying to make it work too' to node 'Ch1_N1_Start' (preJumpMessages=4, hasJump=False, blockPauseIndex=3)
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:28] Parsed choice option 'Blah blah' in node 'Ch1_N1_Start'
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:34] Added choice 'Blah blah' to node 'Ch1_N1_Start' (preJumpMessages=4, hasJump=False, blockPauseIndex=3)
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:34] Closed choice block in node 'Ch1_N1_Start' with 2 choices at pauseIndex 3
 [BubbleSpinner] [42] Unlockable CG: Miravella/MiraCG1
-[BubbleSpinner] [419] Unlockable CG: Miravella/MiraCG2
-[BubbleSpinner] [527] Unlockable CG: Miravella/MiraCG3
-[BubbleSpinner] [530] Unlockable CG: Miravella/MiraCG4
-[BubbleSpinner] [579] Chapter jump → 'MiraCh2' node:'Start'
-[BubbleSpinner] [Mira_Ch1:581] '>> END' on node 'Ch1_N3_Rumor' which already has a jump — >> END ignored
-[BubbleSpinner] Parsed 10 nodes from Mira_Ch1
-[DialogueExecutor] No saved node, defaulting to 'Ch1_N1_Start'
-[ConversationManager] Created new session for 939878_Mira
-[GameEvents] Conversation started: 939878_Mira
-[GameEvents] Game saved
-[ConversationManager] ✓ Saved: 939878_Mira (Node: 'Ch1_N1_Start', Chapter: 'Ch1')
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:141] Opened choice block in node 'Ch1_N1_Mentor' at pauseIndex 22
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:142] Parsed choice option 'should i be worried now' in node 'Ch1_N1_Mentor'
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:147] Added choice 'should i be worried now' to node 'Ch1_N1_Mentor' (preJumpMessages=3, hasJump=True, blockPauseIndex=22)
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:147] Parsed choice option 'sounds like a handful' in node 'Ch1_N1_Mentor'
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:152] Added choice 'sounds like a handful' to node 'Ch1_N1_Mentor' (preJumpMessages=3, hasJump=True, blockPauseIndex=22)
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:152] Parsed choice option 'cute huh' in node 'Ch1_N1_Mentor'
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:157] Added choice 'cute huh' to node 'Ch1_N1_Mentor' (preJumpMessages=3, hasJump=True, blockPauseIndex=22)
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:157] Closed choice block in node 'Ch1_N1_Mentor' with 3 choices at pauseIndex 22
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:176] Opened choice block in node 'Ch1_N1_MissYou' at pauseIndex 9
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:177] Parsed choice option 'i'll make it worth the wait' in node 'Ch1_N1_MissYou'
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:182] Added choice 'i'll make it worth the wait' to node 'Ch1_N1_MissYou' (preJumpMessages=3, hasJump=True, blockPauseIndex=9)
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:182] Parsed choice option 'life is boring without me' in node 'Ch1_N1_MissYou'
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:186] Added choice 'life is boring without me' to node 'Ch1_N1_MissYou' (preJumpMessages=2, hasJump=True, blockPauseIndex=9)
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:186] Parsed choice option 'you'll manage' in node 'Ch1_N1_MissYou'
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:191] Added choice 'you'll manage' to node 'Ch1_N1_MissYou' (preJumpMessages=3, hasJump=True, blockPauseIndex=9)
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:191] Closed choice block in node 'Ch1_N1_MissYou' with 3 choices at pauseIndex 9
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:276] Opened choice block in node 'Ch1_N2_Start' at pauseIndex 32
+[BubbleSpinner][ChoiceDebug] [Mira_Ch1:277] Parsed choice option 'yes ma'am' in node 'Ch1_N2_Start'
+...
+
+[DialogueExecutor][ChoiceDebug] GetEndIndexForNextStop node='Ch1_N1_Start', startFrom=0, endIndex=2, unresolvedBlocks=Ch1_N1_Start_block0@3:pending
+[DialogueExecutor][ChoiceDebug] GetEndIndexForNextStop node='Ch1_N1_Start', startFrom=0, endIndex=2, unresolvedBlocks=Ch1_N1_Start_block0@3:pending
+[DialogueExecutor][ChoiceDebug] ProcessCurrentNode node='Ch1_N1_Start', currentMessageIndex=0, unreadToNextStop=2, nextStopIndex=2
+[DialogueExecutor][ChoiceDebug] GetEndIndexForNextStop node='Ch1_N1_Start', startFrom=0, endIndex=2, unresolvedBlocks=Ch1_N1_Start_block0@3:pending
+
+[DialogueExecutor] Player-turn pause — emitting player message: 'test'
+
+[DialogueExecutor][ChoiceDebug] GetEndIndexForNextStop node='Ch1_N1_Start', startFrom=3, endIndex=3, unresolvedBlocks=Ch1_N1_Start_block0@3:pending
+[DialogueExecutor][ChoiceDebug] GetEndIndexForNextStop node='Ch1_N1_Start', startFrom=3, endIndex=3, unresolvedBlocks=Ch1_N1_Start_block0@3:pending
+[DialogueExecutor][ChoiceDebug] ProcessCurrentNode node='Ch1_N1_Start', currentMessageIndex=3, unreadToNextStop=0, nextStopIndex=3
+
+[DialogueExecutor] Player-turn pause — emitting player message: 'End Test'
+[DialogueExecutor][ChoiceDebug] GetEndIndexForNextStop node='Ch1_N1_Start', startFrom=4, endIndex=9, unresolvedBlocks=Ch1_N1_Start_block0@3:pending
+[DialogueExecutor][ChoiceDebug] GetEndIndexForNextStop node='Ch1_N1_Start', startFrom=4, endIndex=9, unresolvedBlocks=Ch1_N1_Start_block0@3:pending
+[DialogueExecutor][ChoiceDebug] ProcessCurrentNode node='Ch1_N1_Start', currentMessageIndex=4, unreadToNextStop=5, nextStopIndex=9
+[DialogueExecutor][ChoiceDebug] GetEndIndexForNextStop node='Ch1_N1_Start', startFrom=4, endIndex=9, unresolvedBlocks=Ch1_N1_Start_block0@3:pending
 
 ISSUE:
 

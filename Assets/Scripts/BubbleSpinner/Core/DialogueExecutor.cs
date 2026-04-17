@@ -81,6 +81,11 @@ namespace BubbleSpinner.Core
             state             = conversationState ?? throw new ArgumentNullException(nameof(conversationState));
             callbacks         = externalCallbacks;
 
+            state.readMessageIds ??= new List<string>();
+            state.resolvedChoiceBlockIds ??= new List<string>();
+            state.messageHistory ??= new List<MessageData>();
+            state.unlockedCGs ??= new List<string>();
+
             ValidateChapterId();
             LoadCurrentChapter();
             ValidateState();
@@ -149,9 +154,10 @@ namespace BubbleSpinner.Core
 
                 case ResumeTarget.Choices:
                     state.isInPauseState = false;
-                    var choiceBlock = currentNode.GetChoiceBlockAt(state.currentMessageIndex);
+                    var choiceBlock = GetPendingChoiceBlockAtCurrentIndex();
                     if (choiceBlock != null)
                     {
+                        BSDebug.Info($"[DialogueExecutor][ChoiceDebug] ResumeTarget.Choices at node '{state.currentNodeName}', messageIndex={state.currentMessageIndex}, blockId='{choiceBlock.blockId}', choices={choiceBlock.choices.Count}");
                         if (PlayerMessageBeforeChoiceWasSent(choiceBlock))
                             OnChoicesReady?.Invoke(choiceBlock.choices);
                         else
@@ -233,13 +239,17 @@ namespace BubbleSpinner.Core
         public void OnChoiceSelected(ChoiceData choice)
         {
             BSDebug.Info($"[DialogueExecutor] Choice selected: {choice.choiceText}");
+            BSDebug.Info($"[DialogueExecutor][ChoiceDebug] OnChoiceSelected node='{state.currentNodeName}', messageIndex={state.currentMessageIndex}, hasJump={choice.HasJump}, preJumpMessages={choice.preJumpMessages.Count}");
 
             state.isInPauseState = false;
             state.resumeTarget   = ResumeTarget.None;
 
+            MarkCurrentChoiceBlockResolved();
+
             if (choice.HasPreJumpMessages)
             {
                 pendingChoiceJump = choice;
+                BSDebug.Info($"[DialogueExecutor][ChoiceDebug] Staging {choice.preJumpMessages.Count} pre-jump messages for choice '{choice.choiceText}'");
 
                 // Stage pre-jump messages in the pending buffer.
                 pendingDisplayMessages.Clear();
@@ -255,6 +265,7 @@ namespace BubbleSpinner.Core
             else
             {
                 BSDebug.Info("[DialogueExecutor] Fall-through choice — continuing node");
+                BSDebug.Info($"[DialogueExecutor][ChoiceDebug] Fall-through continuing from node='{state.currentNodeName}', currentMessageIndex={state.currentMessageIndex}");
                 ProcessCurrentNode();
             }
         }
@@ -290,6 +301,7 @@ namespace BubbleSpinner.Core
             {
                 var choice    = pendingChoiceJump;
                 pendingChoiceJump = null;
+                BSDebug.Info($"[DialogueExecutor][ChoiceDebug] OnMessagesDisplayComplete resolving pending choice '{choice.choiceText}' with hasJump={choice.HasJump}");
 
                 if (choice.HasJump)
                     ExecuteJump(choice.jump);
@@ -326,6 +338,7 @@ namespace BubbleSpinner.Core
             }
 
             var messagesToShow = GetUnreadMessagesToNextStop();
+            BSDebug.Info($"[DialogueExecutor][ChoiceDebug] ProcessCurrentNode node='{state.currentNodeName}', currentMessageIndex={state.currentMessageIndex}, unreadToNextStop={messagesToShow.Count}, nextStopIndex={GetEndIndexForNextStop()}");
 
             if (messagesToShow.Count > 0)
             {
@@ -360,7 +373,20 @@ namespace BubbleSpinner.Core
 
         private void DetermineNextAction()
         {
-            // Check for a regular pause point first
+            // Choice blocks must win when they share the same execution index as a pause.
+            // This is what allows fall-through choices to appear before any later Player:
+            // line that happens to live at the same message index.
+            var choiceBlock = GetPendingChoiceBlockAtCurrentIndex();
+            if (choiceBlock != null)
+            {
+                BSDebug.Info($"[DialogueExecutor][ChoiceDebug] DetermineNextAction found choice block '{choiceBlock.blockId}' at node='{state.currentNodeName}', messageIndex={state.currentMessageIndex}, choices={choiceBlock.choices.Count}");
+                state.isInPauseState = false;
+                state.resumeTarget   = ResumeTarget.Choices;
+                OnChoicesReady?.Invoke(choiceBlock.choices);
+                return;
+            }
+
+            // Check for a regular pause point after choice resolution.
             if (currentNode.ShouldPauseAfter(state.currentMessageIndex))
             {
                 var pausePoint = currentNode.GetPauseAt(state.currentMessageIndex);
@@ -371,16 +397,6 @@ namespace BubbleSpinner.Core
                     OnPauseReached?.Invoke();
                     return;
                 }
-            }
-
-            // Check for a choice block — runs unconditionally, independent of pausePoints
-            var choiceBlock = currentNode.GetChoiceBlockAt(state.currentMessageIndex);
-            if (choiceBlock != null)
-            {
-                state.isInPauseState = false;
-                state.resumeTarget   = ResumeTarget.Choices;
-                OnChoicesReady?.Invoke(choiceBlock.choices);
-                return;
             }
 
             if (currentNode.jump != null && currentNode.jump.IsValid)
@@ -398,9 +414,10 @@ namespace BubbleSpinner.Core
 
         private void DetermineNextActionSkipPause()
         {
-            var choiceBlock = currentNode.GetChoiceBlockAt(state.currentMessageIndex);
+            var choiceBlock = GetPendingChoiceBlockAtCurrentIndex();
             if (choiceBlock != null)
             {
+                BSDebug.Info($"[DialogueExecutor][ChoiceDebug] DetermineNextActionSkipPause found choice block '{choiceBlock.blockId}' at node='{state.currentNodeName}', messageIndex={state.currentMessageIndex}, choices={choiceBlock.choices.Count}");
                 state.resumeTarget = ResumeTarget.Choices;
                 OnChoicesReady?.Invoke(choiceBlock.choices);
                 return;
@@ -472,6 +489,7 @@ namespace BubbleSpinner.Core
             state.currentChapterId    = chapterId;
             state.currentMessageIndex = 0;
             state.readMessageIds.Clear();
+            state.resolvedChoiceBlockIds.Clear();
             pendingDisplayMessages.Clear();
             pendingNextMessageIndex = -1;
 
@@ -553,9 +571,14 @@ namespace BubbleSpinner.Core
 
             foreach (var block in currentNode.choiceBlocks)
             {
+                if (IsChoiceBlockResolved(block))
+                    continue;
+
                 if (block.pauseIndex >= startFrom && block.pauseIndex < endIndex)
                     endIndex = block.pauseIndex;
             }
+
+            BSDebug.Info($"[DialogueExecutor][ChoiceDebug] GetEndIndexForNextStop node='{state.currentNodeName}', startFrom={startFrom}, endIndex={endIndex}, unresolvedBlocks={DescribeChoiceBlocks()}");
 
             return endIndex;
         }
@@ -592,6 +615,7 @@ namespace BubbleSpinner.Core
                 state.currentChapterId    = entry.chapterId;
                 state.currentMessageIndex = 0;
                 state.readMessageIds.Clear();
+                state.resolvedChoiceBlockIds.Clear();
                 BSDebug.Info($"[DialogueExecutor] No chapter ID in state, defaulting to '{state.currentChapterId}'");
             }
         }
@@ -615,6 +639,11 @@ namespace BubbleSpinner.Core
 
         private void ValidateState()
         {
+            state.readMessageIds ??= new List<string>();
+            state.resolvedChoiceBlockIds ??= new List<string>();
+            state.messageHistory ??= new List<MessageData>();
+            state.unlockedCGs ??= new List<string>();
+
             if (string.IsNullOrEmpty(state.currentNodeName) ||
                 !currentNodes.ContainsKey(state.currentNodeName))
             {
@@ -651,6 +680,57 @@ namespace BubbleSpinner.Core
                 return true;
 
             return state.readMessageIds.Contains(priorMessage.messageId);
+        }
+
+        private ChoiceBlock GetPendingChoiceBlockAtCurrentIndex()
+        {
+            var block = currentNode.GetChoiceBlockAt(state.currentMessageIndex);
+            BSDebug.Info($"[DialogueExecutor][ChoiceDebug] GetPendingChoiceBlockAtCurrentIndex node='{state.currentNodeName}', messageIndex={state.currentMessageIndex}, rawBlock={(block == null ? "<none>" : block.blockId)}, resolved={IsChoiceBlockResolved(block)}");
+            return IsChoiceBlockResolved(block) ? null : block;
+        }
+
+        private bool IsChoiceBlockResolved(ChoiceBlock block)
+        {
+            if (block == null || string.IsNullOrEmpty(block.blockId))
+                return false;
+
+            return state.resolvedChoiceBlockIds.Contains(block.blockId);
+        }
+
+        private void MarkCurrentChoiceBlockResolved()
+        {
+            var block = currentNode.GetChoiceBlockAt(state.currentMessageIndex);
+            if (block == null || string.IsNullOrEmpty(block.blockId))
+            {
+                BSDebug.Warn($"[DialogueExecutor][ChoiceDebug] MarkCurrentChoiceBlockResolved found no block at node='{state.currentNodeName}', messageIndex={state.currentMessageIndex}");
+                return;
+            }
+
+            if (!state.resolvedChoiceBlockIds.Contains(block.blockId))
+            {
+                state.resolvedChoiceBlockIds.Add(block.blockId);
+                BSDebug.Info($"[DialogueExecutor][ChoiceDebug] Resolved block '{block.blockId}' at node='{state.currentNodeName}', messageIndex={state.currentMessageIndex}. ResolvedNow=[{string.Join(", ", state.resolvedChoiceBlockIds)}]");
+            }
+            else
+            {
+                BSDebug.Info($"[DialogueExecutor][ChoiceDebug] Block '{block.blockId}' was already resolved. ResolvedNow=[{string.Join(", ", state.resolvedChoiceBlockIds)}]");
+            }
+        }
+
+        private string DescribeChoiceBlocks()
+        {
+            if (currentNode == null || currentNode.choiceBlocks == null || currentNode.choiceBlocks.Count == 0)
+                return "<none>";
+
+            var describedBlocks = new List<string>();
+            foreach (var block in currentNode.choiceBlocks)
+            {
+                string blockId = string.IsNullOrEmpty(block.blockId) ? "<no-id>" : block.blockId;
+                string stateLabel = IsChoiceBlockResolved(block) ? "resolved" : "pending";
+                describedBlocks.Add($"{blockId}@{block.pauseIndex}:{stateLabel}");
+            }
+
+            return string.Join(", ", describedBlocks);
         }
 
         private string GetFirstNodeName()
