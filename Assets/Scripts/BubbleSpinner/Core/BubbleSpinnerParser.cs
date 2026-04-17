@@ -52,6 +52,7 @@ namespace BubbleSpinner.Core
         private class ParserContext
         {
             public DialogueNode currentNode;
+            public ChoiceBlock currentChoiceBlock;
             public ChoiceData currentChoice;
             public bool inChoiceBlock;
             public bool choiceJumpSeen;
@@ -199,12 +200,14 @@ namespace BubbleSpinner.Core
                 }
 
                 // Assign IDs to pre-jump messages inside choices
-                for (int c = 0; c < node.choices.Count; c++)
+                for (int b = 0; b < node.choiceBlocks.Count; b++)
                 {
-                    var choice = node.choices[c];
-                    for (int m = 0; m < choice.preJumpMessages.Count; m++)
+                    var block = node.choiceBlocks[b];
+                    for (int c = 0; c < block.choices.Count; c++)
                     {
-                        choice.preJumpMessages[m].messageId = $"{nodeName}_choice{c}_prejump{m}";
+                        var choice = block.choices[c];
+                        for (int m = 0; m < choice.preJumpMessages.Count; m++)
+                            choice.preJumpMessages[m].messageId = $"{nodeName}_block{b}_choice{c}_prejump{m}";
                     }
                 }
             }
@@ -495,10 +498,14 @@ namespace BubbleSpinner.Core
             return true;
         }
 
+        /// <summary>
+        /// Handles the start of a choice block using '>> choice'.
+        /// </summary>
+        /// <param name="line">The current line being parsed.</param>
+        /// <param name="ctx">The parser context containing the current parsing state, node, and metadata.</param>
         private static bool TryParseChoiceBlockStart(string line, ParserContext ctx)
         {
-            if (line != ">> choice")
-                return false;
+            if (line != ">> choice") return false;
 
             if (ctx.indentLevel != 0)
             {
@@ -515,13 +522,8 @@ namespace BubbleSpinner.Core
             }
 
             ctx.inChoiceBlock = true;
-
-            // Insert an implicit pause point at the current message count.
-            // Store the index on the node so the executor can distinguish this
-            // pause from a regular pacing pause and fire choices directly.
-            int choicePauseIndex = ctx.currentNode.messages.Count;
-            ctx.currentNode.pausePoints.Add(new PausePoint(choicePauseIndex));
-            ctx.currentNode.choicePauseIndex = choicePauseIndex;
+            ctx.currentChoiceBlock = new ChoiceBlock(ctx.currentNode.messages.Count);
+            ctx.currentNode.choiceBlocks.Add(ctx.currentChoiceBlock);
 
             ctx.lastParsedWasTitle = false;
             return true;
@@ -551,6 +553,8 @@ namespace BubbleSpinner.Core
             }
 
             ctx.inChoiceBlock = false;
+            ctx.currentChoiceBlock = null;
+
             ctx.lastParsedWasTitle = false;
             return true;
         }
@@ -888,7 +892,14 @@ namespace BubbleSpinner.Core
         {
             if (ctx.currentChoice == null) return;
 
-            ctx.currentNode.choices.Add(ctx.currentChoice);
+            if (ctx.currentChoiceBlock == null)
+            {
+                BSDebug.Error($"[BubbleSpinner] [{ctx.fileName}:{ctx.lineNumber}] " +
+                    $"Cannot add choice '{ctx.currentChoice.choiceText}' — no open choice block");
+                return;
+            }
+
+            ctx.currentChoiceBlock.choices.Add(ctx.currentChoice);
         }
 
         private static void FinalizeCurrentNode(ParserContext ctx, Dictionary<string, DialogueNode> nodes)
@@ -914,19 +925,20 @@ namespace BubbleSpinner.Core
 
             var node = ctx.currentNode;
 
-            if (node.messages.Count == 0 && (node.choices.Count > 0 || (node.jump != null && node.jump.IsValid)))
+            bool hasChoices = node.choiceBlocks.Count > 0 && node.choiceBlocks.Exists(b => b.choices.Count > 0);
+
+            if (node.messages.Count == 0 && (hasChoices || (node.jump != null && node.jump.IsValid)))
             {
                 BSDebug.Warn($"[BubbleSpinner] [{ctx.fileName}] Node '{node.nodeName}' has no messages");
             }
 
-            if (node.choices.Count > 0 && node.jump != null && node.jump.IsValid)
+            if (hasChoices && node.jump != null && node.jump.IsValid)
             {
-                bool allChoicesHaveJumps = node.choices.TrueForAll(c => c.HasJump);
+                bool allChoicesHaveJumps = node.choiceBlocks.TrueForAll(
+                    b => b.choices.TrueForAll(c => c.HasJump));
 
                 if (allChoicesHaveJumps)
-                {
                     BSDebug.Warn($"[BubbleSpinner] [{ctx.fileName}] Node '{node.nodeName}' has both choices and auto-jump — auto-jump is unreachable");
-                }
             }
 
             nodes[node.nodeName] = node;
@@ -964,21 +976,22 @@ namespace BubbleSpinner.Core
                 }
 
                 // Warn if node has no jump and no explicit end — likely a missing <<jump>>
+                bool hasChoiceBlocks = node.choiceBlocks.Count > 0 && node.choiceBlocks.Exists(b => b.choices.Count > 0);
+
                 bool hasNoDestination = (node.jump == null || !node.jump.IsValid) &&
-                                        node.choices.Count == 0 &&
+                                        !hasChoiceBlocks &&
                                         !node.isExplicitEnd;
 
                 if (hasNoDestination)
-                {
                     BSDebug.Warn($"[BubbleSpinner] [{fileName}] Node '{node.nodeName}' has no jump and no '>> END' — did you forget a <<jump>>?");
-                }
 
-                foreach (var choice in node.choices)
+                foreach (var block in node.choiceBlocks)
                 {
-                    if (choice.jump != null && choice.jump.IsValid && !choice.jump.isChapterJump)
+                    foreach (var choice in block.choices)
                     {
-                        if (!nodes.ContainsKey(choice.jump.nodeName))
-                            BSDebug.Warn($"[BubbleSpinner] [{fileName}] Choice '{choice.choiceText}' targets non-existent local node '{choice.jump.nodeName}'");
+                        if (choice.jump != null && choice.jump.IsValid && !choice.jump.isChapterJump)
+                            if (!nodes.ContainsKey(choice.jump.nodeName))
+                                BSDebug.Warn($"[BubbleSpinner] [{fileName}] Choice '{choice.choiceText}' targets non-existent local node '{choice.jump.nodeName}'");
                     }
                 }
             }

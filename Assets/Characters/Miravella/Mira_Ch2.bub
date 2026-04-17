@@ -1,0 +1,568 @@
+contact: Mira
+chapter: MiraCh2
+
+// Type: Branch out
+// Chapter: 2
+// Scene Context:
+// One week later. You haven't talked as much. Mira messages first after a long day.
+// Something feels slightly off — nothing dramatic, just… less effortless than before.
+
+title: Ch2_N1_Start
+---
+
+System: "10:30 PM"
+
+Mira: "hey"
+Mira: "you there"
+
+Mira: "sorry"
+Mira: "i've been kinda gone the past few days"
+Mira: "work's been… a lot"
+
+Player: "i just got back"
+
+// no jump choice
+>> choice
+    -> "yeah i noticed"
+        Player: "yeah i noticed, been quiet on your end"
+        
+    -> "i was starting to worry"
+        Player: "i was starting to worry"
+>> endchoice
+
+Player: "you okay?"
+
+Mira: "mm"
+Mira: "just tired"
+
+Mira: "today felt extra long for no reason"
+
+Mira: "but"
+Mira: "the junior's getting a bit better"
+
+Player: "oh?"
+
+Mira: "yeah"
+Mira: "he actually asked questions today"
+
+Mira: "instead of just staring at me like i'm gonna fire him"
+
+Player: "that's progress"
+
+Mira: "tiny progress"
+Mira: "but i'll take it"
+
+Mira: "he still apologizes a lot though"
+Mira: "just… less"
+
+Mira: "he brought me coffee earlier"
+
+Mira: "didn't even ask"
+Mira: "just left it on my desk"
+
+>> media npc type:image unlock:true path:Miravella/MiraCG5
+// [Image: Mira/CG1 — dim office desk at night, half-finished coffee cup, Mira leaning back in chair looking tired, soft monitor glow lighting her face]
+
+Player: "nice of him"
+
+Mira: "yeah"
+Mira: "it helped"
+
+Mira: "…i think he noticed i've been off"
+
+Player: "what do you mean"
+
+Mira: "he asked if i was okay"
+
+Mira: "said i looked distracted"
+
+Player: "what did you say"
+
+Mira: "nothing really"
+Mira: "just said i didn't sleep well"
+
+Mira: "didn't feel like explaining"
+
+Player: "fair"
+
+Mira: "he got awkward after"
+Mira: "changed the topic fast"
+
+Mira: "kinda cute"
+
+>> choice
+    -> "wow you really like him huh"
+        Player: "wow you really like him huh"
+        Mira: "don't start"
+        Mira: "it's not like that"
+        <<jump Ch2_N1_Distance>>
+
+    -> "sounds like he's trying"
+        Player: "sounds like he's trying"
+        Mira: "yeah"
+        Mira: "he is"
+        <<jump Ch2_N1_Distance>>
+
+    -> "good for you then"
+        Player: "good for you then"
+        Mira: "…what's that supposed to mean"
+        Mira: "nevermind"
+        <<jump Ch2_N1_Distance>>
+>> endchoice
+---
+
+title: Ch2_N1_Distance
+---
+Mira: "anyway"
+
+Mira: "how are you"
+
+Player: "same"
+Player: "internet died again"
+
+Player: "had to finish work on my phone"
+
+Mira: "that sounds painful"
+
+Mira: "i hate that you're stuck there"
+
+Player: "yeah"
+
+Player: "it's too quiet most days"
+
+Mira: "…"
+
+Mira: "i miss you more lately"
+
+Player: "same"
+
+Mira: "it's worse at night"
+
+Mira: "apartment feels too big"
+
+Player: "no one stealing your food anymore"
+
+Mira: "wow"
+Mira: "that's what you think i miss"
+
+Player: "part of it"
+
+Mira: "liar"
+
+Mira: "…i do miss you though"
+
+Player: "i know"
+
+Mira: "any update on your transfer?"
+
+Player: "still nothing"
+
+Player: "maybe another month or two"
+
+Mira: "that's so long"
+
+Mira: "i don't know if i like this anymore"
+
+Player: "…"
+
+Mira: "not us"
+
+Mira: "just"
+Mira: "this setup"
+
+Player: "yeah"
+
+Mira: "the call last weekend helped"
+
+Mira: "but it's not the same"
+
+Player: "i know"
+
+Mira: "…"
+
+Mira: "i haven't eaten yet"
+
+Mira: "just realized"
+
+Player: "go eat"
+Player: "don't skip again"
+Player: "then go to sleep its getting late"
+
+Mira: "yes boss"
+Mira: "night"
+
+...
+
+<<jump Ch2_N2_Start>>
+---
+
+// ========================================================
+// CHAPTER 2 - NODE 2
+// ========================================================
+
+// Scene Context:
+// Three days after the previous chat. Late evening. 
+// Mira messages she's mentioning the welcome nomikai (drinking party) for new employees happening tonight at a nearby izakaya.
+
+title: Ch2_N2_Start
+---
+
+System: "03:30 PM - Friday"
+
+Mira: "hey you"
+Mira: "still up?"
+
+Player: "yeah just closing my laptop"
+Player: "what's up"
+
+Mira: "the office is having that welcome party tonight"
+Mira: "for all the new hires"
+Mira: "including my junior"
+
+Mira: "it's at the izakaya down the street"
+Mira: "drinks food karaoke probably"
+
+Mira: "they invited all the mentors too"
+Mira: "feels kinda mandatory"
+
+Player: "you going?"
+
+Mira: "yeah i think so"
+Mira: "the junior was super nervous about it"
+
+Mira: "he asked me twice if he should skip"
+Mira: "told him it'll be fine"
+
+Player: "Do you really have to go?"
+
+Mira: "…"
+Mira: "not really"
+
+Mira: "but if i don't go"
+Mira: "it kinda looks bad"
+
+Mira: "and he'd probably panic more"
+
+Mira: "…why"
+Mira: "you don't want me to?"
+Mira: "just tell me straight"
+
+>> choice
+    -> "yeah go have fun, i trust you"
+        Player: "yeah go have fun, i trust you"  
+        Mira: "…thank you"  
+        Mira: "that actually means a lot right now"  
+        Mira: "i'll try not to stay too late"
+        <<jump Ch2_N3_BadEND>>
+
+    -> "i'd rather you didn't..."
+        Player: "i'd rather you didn't... it makes me feel even more alone when you're out like that"  
+        Mira: "…"  
+        Mira: "okay"  
+        Mira: "i hear you"  
+        Mira: "maybe i'll just show up for a bit then leave early"  
+        <<jump Ch2_N3_GoodEND>>
+
+>> endchoice
+
+---
+
+// ========================================================
+// GOOD ROUTE - NODE 3
+// ========================================================
+
+title: Ch2_N3_GoodEND
+---
+
+// Scene Context:
+// Same evening, a few hours later.
+// Mira showed up at the party but left early.
+// She’s back home now — quieter, more present, choosing you over the noise.
+
+System: "08:20 PM"
+
+Mira: "hey"
+Mira: "i'm home"
+Mira: "didn't stay long"
+Mira: "just one drink"
+
+Player: "already?"
+Player: "how was it"
+
+Mira: "loud"
+Mira: "too much karaoke"
+
+Mira: "the junior got dragged up"
+Mira: "he looked like he was about to pass out"
+
+Player: "sounds about right"
+
+Mira: "kept looking at me for help"
+Mira: "i just smiled and let him deal with it"
+
+Player: "cruel"
+
+Mira: "a little"
+Mira: "he survived though"
+
+Mira: "i made an excuse and left early"
+Mira: "said i had work tomorrow"
+
+Player: "you didn't have to do that just for me"
+
+Mira: "i know"
+Mira: "i wanted to"
+
+Mira: "felt better coming home"
+
+>> media npc type:image unlock:true path:Miravella/MiraCG6
+// [Image: Mira/CG1 — selfie in dim apartment lighting, messy hair, soft smile, oversized hoodie, faint party wristband visible]
+
+Mira: "see"
+Mira: "already back"
+
+Player: "you look tired"
+Player: "but happy"
+
+Mira: "i am"
+Mira: "because i'm talking to you now"
+
+Mira: "the apartment still feels big"
+Mira: "but it's quieter like this"
+
+Player: "miss you"
+
+Mira: "miss you more tonight"
+
+Mira: "kept thinking about you there"
+Mira: "you would've hated it"
+
+Player: "i would've"
+Player: "but i'd still go if you dragged me"
+
+Mira: "haha"
+Mira: "next time you're back"
+Mira: "i'm dragging you"
+
+>> choice
+    -> "can't wait for that"
+        Player: "can't wait for that"  
+        Mira: "mm good"  
+        Mira: "me too"
+        <<jump Ch2_N3GE_ComingHome>>
+
+    -> "leaving a party early for me?" 
+        Player: "leaving a party early for me?"  
+        Mira: "don't make it a big deal"  
+        Mira: "but yeah… i did"
+        <<jump Ch2_N3GE_ComingHome>>
+
+    -> "glad you're home safe" 
+        Player: "glad you're home safe"  
+        Mira: "i am"  
+        Mira: "thanks for that"
+        <<jump Ch2_N3GE_ComingHome>>
+>> endchoice
+---
+
+title: Ch2_N3GE_ComingHome
+---
+
+Mira: "…"
+Mira: "thanks for earlier"
+
+Mira: "for saying how you felt"
+Mira: "it mattered more than you think"
+
+Player: "you matter"
+Player: "always"
+
+Mira: "…mm"
+
+Mira: "you're making it hard not to smile right now"
+
+>> media npc type:image unlock:true path:Miravella/MiraCG7
+// [Image: Mira/CG2 — mirror selfie after a shower, damp hair, wearing your old company hoodie, soft sleepy expression]
+
+Mira: "i'm gonna sleep soon"
+
+Player: "good"
+Player: "rest properly"
+
+Mira: "i will"
+
+Mira: "night"
+Mira: "love you"
+
+<<jump chapter:MiraCh3 node:GoodEnd_Start>>
+---
+
+// ========================================================
+// BAD ROUTE - NODE 3
+// ========================================================
+
+title: Ch2_N3_BadEND
+---
+
+// Scene Context:
+// After the nomikai last night, lead straight into the breakup arc.
+
+System: "10:00 PM - Friday"
+
+Player: "Hay babe are you home?"
+Player: "Text me when you read this"
+Player: "..."
+
+System: "09:20 AM - Saturday"
+
+Mira: "hey..."
+Mira: "sorry i didn't reply last night"
+Mira: "got back super late"
+
+Player: "finally"
+Player: "was starting to worry"
+
+Mira: "yeah"
+Mira: "the party ran longer than i expected"
+
+Player: "you okay? you sound off"
+
+Mira: "i'm fine"
+Mira: "just hungover"
+Mira: "head hurts a bit"
+
+Player: "drink water"
+Player: "and tell me how it went"
+
+Mira: "it was loud..."
+Mira: "junior got really drunk"
+Mira: "kept clinging to me"
+
+Player: "clinging?"
+
+Mira: "not like that"
+Mira: "just emotional drunk talk"
+
+>> media npc type:image unlock:true path:Miravella/MiraCG8
+// [Image: Mira/CG1 — bathroom mirror selfie, pale face, messy hair, eyes red, unfamiliar apartment lighting and layout visible behind her]
+
+Mira: "i look like shit huh"
+
+Player: "you do look rough"
+Player: "where are you right now?"
+
+Mira: "huh?"
+Mira: "i'm in my apartment"
+
+Player: "that's not your room"
+Player: "the wall behind you isn't yours"
+
+Mira: "..."
+Mira: "what do you mean"
+
+Player: "and that door isn't your layout"
+
+Mira: "wait..."
+Mira: "i just got back and took the pic"
+Mira: "i'm still hungover so maybe i'm confused"
+
+Player: "mira"
+
+Mira: "you're overthinking it"
+Mira: "i'm just tired okay"
+
+Player: "stop"
+Player: "just answer me properly"
+
+Mira: "i am answering"
+Mira: "i told you i'm in my apartment"
+
+Player: "you're lying"
+
+Mira: "..."
+Mira: "why are you doing this right now"
+Mira: "over a stupid wall"
+
+Player: "because it doesn't look like your place"
+Player: "where did you sleep last night"
+
+Mira: "i..."
+Mira: "i don't want to do this over text"
+
+Player: "you already started it"
+
+Mira: "..."
+Mira: "okay"
+Mira: "we kissed"
+Mira: "it just happened"
+Mira: "i was drunk"
+
+Player: "you kissed who?!"
+
+Mira: "the new guy from work"
+Mira: "i'm sorry"
+Mira: "i didn't mean for it to happen"
+
+Player: "outside?"
+Player: "so you left the group with him?"
+
+Mira: "it wasn't planned"
+Mira: "please believe me"
+
+Mira: "i felt guilty right after"
+Mira: "that's why i didn't message"
+
+Player: "you didn't message because you cheated"
+
+Mira: "..."
+Mira: "it was more than a kiss"
+
+Mira: "we went back to his place"
+Mira: "i slept with him"
+
+Mira: "i'm so sorry"
+
+Player: "..."
+
+Player: "we're done"
+
+Mira: "wait"
+Mira: "please don't say that"
+Mira: "i told you because i couldn't lie anymore"
+Mira: "i still love you"
+
+Player: "loving me didn't stop you last night"
+
+Mira: "i was drunk..."
+Mira: "it was a mistake"
+
+Player: "a mistake is forgetting my birthday"
+Player: "not fucking your junior"
+
+Mira: "..."
+Mira: "i deserve that"
+
+Player: "nothing"
+Player: "just delete my number"
+
+Mira: "babe..."
+
+Player: "don't call me that anymore"
+
+Mira: "i'm crying right now"
+Mira: "please"
+
+Player: "I’m really angry right now"
+Player: "Don’t message me. I need space."
+
+Mira: "please don't be like this"
+Mira: "it was one night... it doesn't have to end us"
+
+Player: "you made your choice last night"
+
+Mira: "..."
+
+<<jump chapter:MiraCh3 node:BadEND_Start>>
+
+>> END
+---

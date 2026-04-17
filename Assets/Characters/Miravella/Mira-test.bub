@@ -1,0 +1,93 @@
+contact: Mira
+chapter: MiraCh2
+
+// Type: Branch
+// Chapter: 2
+// Scene Context:
+// One week later. You haven't talked as much. Mira messages first after a long day.
+// Something feels slightly off — nothing dramatic, just… less effortless than before.
+
+title: Ch2_N1_Start
+---
+
+System: "07:30 PM"
+
+Mira: "hey"
+Mira: "you there"
+
+Mira: "sorry"
+Mira: "i've been kinda gone the past few days"
+Mira: "work's been… a lot"
+
+Player: "i just got back"
+
+// no jump choice
+>> choice
+    -> "yeah i noticed"
+        Player: "yeah i noticed, been quiet on your end"
+    -> "i was starting to worry"
+        Player: "i was starting to worry"
+>> endchoice
+
+Player: "you okay?"
+
+Mira: "mm"
+Mira: "just tired"
+
+Mira: "today felt extra long for no reason"
+
+Mira: "but"
+Mira: "the junior's getting a bit better"
+
+Player: "oh?"
+
+Mira: "yeah"
+Mira: "he actually asked questions today"
+
+Mira: "instead of just staring at me like i'm gonna fire him"
+
+Player: "that's progress"
+
+Mira: "tiny progress"
+Mira: "but i'll take it"
+
+Mira: "he still apologizes a lot though"
+Mira: "just… less"
+
+Mira: "he brought me coffee earlier"
+
+Mira: "didn't even ask"
+Mira: "just left it on my desk"
+
+// Mira sends:
+// [Image: Mira/CG1 — dim office desk at night, half-finished coffee cup, Mira leaning back in chair looking tired, soft monitor glow lighting her face]
+
+Player: "nice of him"
+
+Mira: "yeah"
+Mira: "it helped"
+
+Mira: "…i think he noticed i've been off"
+
+Player: "what do you mean"
+
+Mira: "he asked if i was okay"
+
+Mira: "said i looked distracted"
+
+Player: "what did you say"
+
+Mira: "nothing really"
+Mira: "just said i didn't sleep well"
+
+Mira: "didn't feel like explaining"
+
+Player: "fair"
+
+Mira: "he got awkward after"
+Mira: "changed the topic fast"
+
+Mira: "kinda cute"
+System: "End"
+>> END
+---

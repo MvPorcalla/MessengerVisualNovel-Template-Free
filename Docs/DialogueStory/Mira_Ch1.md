@@ -1,0 +1,565 @@
+contact: Mira
+chapter: Ch1
+
+// Type: Linear
+// Chapter: 1
+// Scene Context:
+// Late evening. Mira just got out of the main office and messages first while heading home.
+// You arrive later at your quiet rural apartment after a long day.
+
+title: Ch1_N1_Start
+---
+
+System: "06:15 PM"
+
+Mira: "just got out"
+Mira: "today drained me"
+Mira: "wait"
+Mira: "look"
+
+>> media npc type:image unlock:true path:Miravella/CG1
+// [Image: Miravella/CG1 — mirror selfie in the office restroom, sleeves slightly rolled up, hair a bit messy, faint tired smile]
+
+Mira: "i look dead"
+
+Player: "…you kinda do"
+Player: "but still cute"
+
+Mira: "wow"
+Mira: "i'll take it"
+
+Player: "i just got home"
+Player: "i swear today tried to kill me"
+
+Mira: "what happened"
+
+Player: "system kept bugging out"
+Player: "and there's like no one here to fix it fast"
+
+Player: "kinda miss the main office chaos"
+Player: "at least things moved"
+
+Mira: "yeah…"
+Mira: "rural branch life hitting you now huh"
+
+Player: "yeah"
+Player: "it's way too quiet here"
+
+Player: "even the office feels empty after hours"
+Player: "just me and flickering lights"
+
+Mira: "okay that sounds creepy"
+Mira: "i don't like that"
+
+Player: "you should"
+Player: "builds character"
+
+Mira: "stop 😭"
+Mira: "now i'm imagining you alone there"
+Mira: "…i don't like that you're that far"
+
+>> choice
+    -> "it's just temporary"
+        Player: "it's just temporary, i'll be back before you know it"
+        Mira: "you better"
+        Mira: "i'm holding onto that"
+        <<jump Ch1_N1_Mentor>>
+    -> "you don't trust me?"
+        Player: "what, you don't trust me alone with ghosts?"
+        Mira: "wow so funny"
+        Mira: "i hope they haunt you properly"
+        <<jump Ch1_N1_Mentor>>
+    -> "i'll get used to it"
+        Player: "i'll get used to it"
+        Mira: "…yeah"
+        Mira: "i guess you will"
+        <<jump Ch1_N1_Mentor>>
+>> endchoice
+---
+
+title: Ch1_N1_Mentor
+---
+Mira: "anyway"
+Mira: "something new happened today"
+
+Player: "oh?"
+
+Mira: "they assigned me a junior"
+Mira: "i have to mentor him starting tomorrow"
+
+Player: "look at you leveling up"
+
+Mira: "don't"
+Mira: "it feels weird"
+Mira: "like yesterday i was the one asking questions"
+Mira: "now i have to answer them"
+
+Player: "you'll do fine"
+
+Mira: "he's fresh grad"
+Mira: "super quiet"
+Mira: "just kinda follows people around"
+Mira: "like he's scared to touch anything"
+
+Player: "sounds familiar"
+
+Mira: "hey"
+Mira: "i was not that bad"
+
+Player: "debatable"
+
+Mira: "rude"
+Mira: "…he's kinda cute though"
+Mira: "in a lost way"
+
+>> choice
+    -> "should i be worried now"
+        Player: "wow should i be worried now"
+        Mira: "please"
+        Mira: "he still calls excel the table thing"
+        <<jump Ch1_N1_MissYou>>
+    -> "sounds like a handful"
+        Player: "sounds like a handful"
+        Mira: "yeah"
+        Mira: "i might lose my patience day one"
+        <<jump Ch1_N1_MissYou>>
+    -> "cute huh"
+        Player: "cute huh"
+        Mira: "don't start"
+        Mira: "it's not like that"
+        <<jump Ch1_N1_MissYou>>
+>> endchoice
+---
+
+title: Ch1_N1_MissYou
+---
+Mira: "anyway"
+Mira: "i miss you"
+
+Player: "yeah… same"
+
+Mira: "when do you think you can visit"
+Mira: "even just for a weekend"
+
+Player: "still waiting for approval"
+Player: "maybe next month"
+
+Mira: "that's so far"
+Mira: "it's been really quiet here without you"
+
+>> choice
+    -> "i'll make it worth the wait"
+        Player: "i'll make it worth the wait when i get back"
+        Mira: "you better"
+        Mira: "i'm counting on that"
+        <<jump Ch1_N1_Ending>>
+    -> "life is boring without me"
+        Player: "wow you admit life is boring without me"
+        Mira: "don't get used to it"
+        <<jump Ch1_N1_Ending>>
+    -> "you'll manage"
+        Player: "you'll manage"
+        Mira: "…yeah"
+        Mira: "i always do"
+        <<jump Ch1_N1_Ending>>
+>> endchoice
+---
+
+title: Ch1_N1_Ending
+---
+Mira: "i'm about to crash honestly"
+Mira: "my brain stopped working"
+
+Player: "go sleep"
+
+Mira: "you too"
+Mira: "and eat something real tomorrow"
+
+Player: "yes ma'am"
+
+Mira: "…love you"
+
+<<jump Ch1_N2_Start>>
+
+---
+
+// ========================================================
+// CHAPTER 1 - NODE 2
+// ========================================================
+
+// Scene Context:
+// Next evening. Mira just finished her first day mentoring the junior. You're already back
+// in your apartment after another quiet day at the rural branch. Routine continues,
+// but small shifts start to show.
+
+title: Ch1_N2_Start
+---
+System: "07:10 PM"
+
+Player: "you alive?"
+
+Mira: "barely"
+Mira: "i just got home"
+
+Mira: "today was… something"
+
+Player: "first day with your trainee?"
+
+Mira: "yeah"
+Mira: "you're not ready"
+
+Mira: "he stood behind me for like 10 minutes"
+Mira: "just watching"
+
+Player: "menacing"
+
+Mira: "exactly"
+Mira: "i thought he was gonna disappear if i turned around"
+
+Player: "so how bad is it"
+
+Mira: "not bad"
+Mira: "just… slow"
+
+Mira: "he double checks everything"
+Mira: "even clicking buttons"
+
+Player: "okay that's kinda cute"
+
+Mira: "don't start"
+Mira: "i already said that once"
+
+Player: "just saying"
+
+Mira: "but yeah"
+Mira: "he kept apologizing for everything"
+
+Mira: "like"
+Mira: "sorry ma'am every 2 seconds"
+
+Player: "ma'am???"
+
+Mira: "I KNOW"
+Mira: "i felt 40"
+
+Player: "fits you"
+
+Mira: "wow"
+Mira: "say that again"
+
+>> choice
+    -> "yes ma'am"
+        Player: "yes ma'am"
+        Mira: "i will block you"
+        Mira: "don't test me"
+        <<jump Ch1_N2_Lunch>>
+        
+    -> "respected and mature"
+        Player: "i mean… respected and mature"
+        Mira: "better"
+        Mira: "you almost died there"
+        <<jump Ch1_N2_Lunch>>
+
+    -> "still the hottest ma'am though"
+        Player: "still the hottest ma'am though"
+        Mira: "…okay fine"
+        Mira: "i'll forgive you"
+        <<jump Ch1_N2_Lunch>>
+>> endchoice
+---
+
+title: Ch1_N2_Lunch
+---
+Mira: "anyway"
+Mira: "he brought lunch from home"
+
+Mira: "didn't even eat it at first"
+Mira: "just sat there"
+
+Player: "shy type"
+
+Mira: "yeah"
+Mira: "i had to tell him to eat"
+
+Mira: "felt like babysitting"
+
+Player: "you're gonna get attached"
+
+Mira: "no"
+Mira: "don't say that"
+
+Mira: "it's just work"
+
+Player: "mhm"
+
+Mira: "don't mhm me"
+
+Mira: "what about you"
+Mira: "still haunted office"
+
+Player: "yep"
+Player: "same flickering lights"
+
+Player: "and now the internet died twice"
+
+Mira: "how are you even surviving there"
+
+Player: "built different"
+
+Mira: "built wrong"
+
+Player: "wow"
+
+Mira: "did you at least eat properly today"
+
+Player: "…"
+
+Mira: "oh my god"
+
+>> choice
+    -> "noodles again"
+        Player: "okay yeah… noodles again"
+        Mira: "unbelievable"
+        Mira: "i'm actually mad"
+        <<jump Ch1_N2_MissYou>>
+
+    -> "i added an egg this time"
+        Player: "i added an egg this time"
+        Mira: "…that doesn't fix it"
+        Mira: "but okay slight improvement"
+        <<jump Ch1_N2_MissYou>>
+        
+    -> "i ate real food"
+        Player: "i ate real food"
+        Mira: "you hesitated typing that"
+        Mira: "i don't trust you"
+        <<jump Ch1_N2_MissYou>>
+>> endchoice
+---
+
+title: Ch1_N2_MissYou
+---
+Mira: "i swear if i was there"
+Mira: "i'd cook for you myself"
+
+Player: "i'd like that"
+
+Mira: "yeah…"
+Mira: "it's weird"
+Mira: "i keep looking at your desk"
+Mira: "feels empty"
+
+Player: "same here"
+Player: "no one stealing my snacks anymore"
+
+Mira: "wow that's what you miss"
+
+Player: "top priority"
+
+Mira: "liar"
+Mira: "…i miss you too"
+
+Player: "yeah"
+
+Mira: "okay i need a shower"
+Mira: "i smell like office"
+
+Player: "go"
+
+Mira: "don't disappear okay"
+
+Player: "i'll be here"
+
+Mira: "good"
+Mira: "talk to you later"
+
+...
+
+<<jump Ch1_N3_Start>>
+---
+
+// ========================================================
+// CHAPTER 1 - NODE 3
+// ========================================================
+
+// Scene Context:
+// Late night. Mira just got out of the shower and messages you again. The conversation
+// shifts into more personal, playful territory, but she's still careful about boundaries.
+
+title: Ch1_N3_Start
+---
+
+System: "09:20"
+
+Mira: "I'm back"
+Mira: "i feel human again"
+
+>> media npc type:image unlock:true path:Miravella/CG2
+// [Image: Miravella/CG2 — bathroom mirror selfie wrapped in a towel, wet hair slightly messy, soft warm lighting, tired but relaxed expression]
+
+Mira: "don't zoom in"
+Mira: "i literally just got out"
+
+Player: "…you're dangerously close to getting me arrested by my thoughts"
+
+Mira: "excuse me??"
+
+Player: "i'm just saying"
+Player: "that's unfairly distracting"
+
+Mira: "you're insane"
+
+Player: "send a closer one"
+
+Mira: "absolutely not"
+
+Mira: "i already feel weird sending this"
+Mira: "what if it leaks or something"
+
+Player: "from me?"
+
+Player: "i'd die first"
+
+Mira: "that's not the point"
+
+Mira: "i don't like it"
+Mira: "just… privacy stuff"
+
+Player: "okay okay chill"
+
+Player: "didn't mean to push"
+
+Mira: "…good"
+
+Mira: "don't do that again"
+
+Player: "noted"
+
+Mira: "anyway"
+
+Mira: "i sent it because i missed you a bit"
+Mira: "not for you to malfunction"
+
+Player: "fair"
+
+Player: "you still look good though"
+
+Mira: "stop"
+Mira: "i'm not even dressed properly"
+
+Player: "still counts"
+
+Mira: "whatever"
+
+Player: "send another one then"
+
+Mira: "no"
+
+Player: "just a little closer"
+
+Mira: "i said no"
+
+Mira: "i already told you i feel weird about it"
+
+Player: "come on, it's just me"
+
+Mira: "that doesn't change anything"
+
+Mira: "what if something happens to it later"
+Mira: "i don't trust that stuff"
+
+Player: "nothing will happen"
+
+Mira: "you don't know that"
+
+Player: "you're overthinking it"
+
+Mira: "i'm not"
+
+Player: "just do it"
+
+Mira: "…stop"
+
+Mira: "i'm serious now"
+
+>> choice
+    -> "it's fine, just send it"
+        Player: "it's fine, just send it"
+        Mira: "no"
+        Mira: "i said no"
+        Mira: "why are you pushing this so much?"
+        Mira: "…this is exactly what i didn't want"
+        Mira: "i'm done with this topic"
+        <<jump Ch1_N3_Rumor>>
+
+    -> "okay, my bad"
+        Player: "okay okay, my bad"
+        Mira: "…good"
+        Mira: "just don't make it weird again"
+        <<jump Ch1_N3_CG3>>
+>> endchoice
+---
+
+title: Ch1_N3_CG3
+---
+>> media npc type:image unlock:true path:Miravella/CG3
+// [Image: Miravella/CG3 — casual home outfit, loose top with slightly open neckline, relaxed posture on bed, soft lighting, modest but a bit more natural than before]
+
+>> media npc type:image unlock:true path:Miravella/CG4
+
+Mira: "better now"
+
+Player: "Yes mommy!"
+
+<<jump Ch1_N3_Rumor>>
+---
+
+title: Ch1_N3_Rumor
+---
+Mira: "anyway"
+Mira: "don't make it weird!"
+Mira: "but yeah"
+Mira: "office has been weird lately"
+
+Player: "how weird"
+
+Mira: "like rumors"
+Mira: "people staying late hearing stuff"
+
+Player: "what kind of stuff"
+
+Mira: "footsteps on empty floors"
+Mira: "elevators moving on their own"
+
+Mira: "and…"
+Mira: "someone said they heard moaning"
+
+Player: "…that’s not a ghost"
+
+Mira: "i know right"
+Mira: "that’s what makes it worse"
+
+Mira: "like is it haunted"
+Mira: "or just people being shady"
+
+Player: "either way i wouldn’t stay late"
+
+Mira: "yeah…"
+Mira: "same"
+
+Player: "either way i wouldn’t stay late"
+
+Mira: "yeah…"
+Mira: "same"
+
+Mira: "i’m actually getting sleepy now"
+
+Player: "finally"
+
+Mira: "don’t start"
+Mira: "i’m serious"
+Mira: good night, xoxo
+
+// <<jump chapter:MiraCh2>>
+>> END
+---

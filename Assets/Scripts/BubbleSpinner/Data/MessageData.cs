@@ -176,6 +176,32 @@ namespace BubbleSpinner.Data
         public bool HasPreJumpMessages => preJumpMessages != null && preJumpMessages.Count > 0;
     }
 
+    // ═══════════════════════════════════════════════════════════
+    // CHOICE BLOCK
+    // ═══════════════════════════════════════════════════════════
+
+    /// <summary>
+    /// Represents a single >> choice / >> endchoice block in a node.
+    /// A node can have multiple ChoiceBlocks at different message positions.
+    /// Each block tracks its own pause index and resolved state independently.
+    /// </summary>
+    [Serializable]
+    public class ChoiceBlock
+    {
+        public List<ChoiceData> choices;
+        public int pauseIndex = -1;     // message index where this choice block pauses
+
+        public ChoiceBlock()
+        {
+            choices = new List<ChoiceData>();
+        }
+
+        public ChoiceBlock(int pauseAtIndex) : this()
+        {
+            pauseIndex = pauseAtIndex;
+        }
+    }
+
     // ═══════════════════════════════════════
     // DIALOGUE NODE
     // ═══════════════════════════════════════
@@ -185,22 +211,20 @@ namespace BubbleSpinner.Data
     {
         public string nodeName;
         public List<MessageData> messages;
-        public List<ChoiceData> choices;
+        public List<ChoiceBlock> choiceBlocks;  // replaces choices list to support multiple sequential choice blocks
         public List<PausePoint> pausePoints;
-        public JumpTarget jump;                 // replaces nextNode string
-        public int choicePauseIndex = -1;       // message index where >> choice begins, -1 if no choice block
-        public bool choicesResolved = false;    // set to true after a choice is selected — prevents re-showing choices
-        public bool isExplicitEnd = false;      // set by >> END — marks intentional conversation stop
+        public JumpTarget jump;
+        public bool isExplicitEnd = false;
 
         /// <summary>
-        /// Initializes an empty dialogue node with blank lists and no jump target.
+        /// 
         /// </summary>
         public DialogueNode()
         {
-            messages    = new List<MessageData>();
-            choices     = new List<ChoiceData>();
-            pausePoints = new List<PausePoint>();
-            jump        = null;
+            messages     = new List<MessageData>();
+            choiceBlocks = new List<ChoiceBlock>();
+            pausePoints  = new List<PausePoint>();
+            jump         = null;
         }
 
         public DialogueNode(string name) : this()
@@ -215,14 +239,30 @@ namespace BubbleSpinner.Data
             return false;
         }
 
-        /// <summary>
-        /// Returns the PausePoint at the given message index, or null if none exists.
-        /// </summary>
         public PausePoint GetPauseAt(int messageIndex)
         {
             foreach (var p in pausePoints)
                 if (p.stopIndex == messageIndex) return p;
             return null;
+        }
+
+        /// <summary>
+        /// Returns the choice block that should be presented at the given message index, or null if none.
+        /// </summary>
+        public ChoiceBlock GetChoiceBlockAt(int messageIndex)
+        {
+            foreach (var block in choiceBlocks)
+                if (block.pauseIndex == messageIndex)
+                    return block;
+            return null;
+        }
+
+        /// <summary>
+        /// Returns true if any unresolved choice block exists at this message index.
+        /// </summary>
+        public bool HasUnresolvedChoiceAt(int messageIndex)
+        {
+            return GetChoiceBlockAt(messageIndex) != null;
         }
     }
 

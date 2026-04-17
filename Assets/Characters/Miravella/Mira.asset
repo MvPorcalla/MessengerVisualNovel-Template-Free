@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8834d8febb016234a840bba3b2da941a, type: 3}
+  m_Name: Mira
+  m_EditorClassIdentifier: 
+  characterName: Miravella
+  profileImage:
+    m_AssetGUID: 2e585678e701c5349958c7d50c4a8ee2
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  chapters:
+  - chapterId: Ch1
+    file: {fileID: 2811297602134710623, guid: c3e40a2376121884ea8679af8ef20272, type: 3}
+  - chapterId: MiraCh2
+    file: {fileID: 2811297602134710623, guid: fed9a7a5a1a7031418277000ba5ab2fc, type: 3}
+  - chapterId: MiraCh3
+    file: {fileID: 2811297602134710623, guid: 16626afc34af0d94b88cd3f9ee3caaa5, type: 3}
+  conversationId: 939878_Mira
+  characterAge: 26
+  birthdate: March 12
+  relationshipStatus: 2
+  occupation: Office Worker
+  bio: N/A
+  description: N/A
+  personalityTraits: N/A
+  cgAddressableKeys:
+  - Miravella/MiraCG1
+  - Miravella/MiraCG2
+  - Miravella/MiraCG3
+  - Miravella/MiraCG4
+  - Miravella/MiraCG5
+  - Miravella/MiraCG6
+  - Miravella/MiraCG7
+  - Miravella/MiraCG8
+  - Miravella/MiraCG9
+  - Miravella/MiraCG10
+  - Miravella/MiraCG11
