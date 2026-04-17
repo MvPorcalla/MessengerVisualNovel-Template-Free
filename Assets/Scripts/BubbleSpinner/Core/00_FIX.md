@@ -10,8 +10,21 @@ Request 2 — First Player: line skip pause, with label-match warning
 
 First Player: line in a choice option gets no pause point — it's considered auto-sent by the choice tap
 All subsequent Player: lines inside the same option get pause points normally
-If a choice option has a label like -> "i was trying to make it work too" but the first line inside is not a matching Player: line — warn the author that there's no player speaker line following the choice label
-If no Player: line at all and it goes straight to NPC or <<jump>> — that's valid, no warning, just jump
+If a choice option contain label like -> "i was trying to make it work too" but the first line inside is not a Player: speaker — warn the author that there's no player speaker line following the choice label
+
+Ex. 
+Valid
+-> "Talk to me"
+    Player: talk to me pls
+    NPC: Hi
+    Player: How are you?
+
+Not Valid warn the author
+-> "Talk to me"
+    NPC: Hi
+    Player: How are you?
+
+If no Player: line at all and it goes straight to <<jump>> — that's valid, no warning, just jump
 
 ---
 

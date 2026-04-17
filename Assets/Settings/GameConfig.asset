@@ -36,8 +36,8 @@ MonoBehaviour:
   maxZoom: 3
   zoomSpeed: 0.001
   cgViewerFadeDuration: 0.3
-  bootstrapDebugLogs: 1
-  saveManagerDebugLogs: 1
+  bootstrapDebugLogs: 0
+  saveManagerDebugLogs: 0
   lockScreenDebugLogs: 0
   chatAppDebugLogs: 0
   chatAutoScrollerDebugLogs: 0

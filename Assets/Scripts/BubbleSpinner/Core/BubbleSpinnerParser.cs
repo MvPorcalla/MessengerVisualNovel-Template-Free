@@ -526,8 +526,6 @@ namespace BubbleSpinner.Core
             ctx.inChoiceBlock = true;
             ctx.currentChoiceBlock = new ChoiceBlock(ctx.currentNode.messages.Count);
             ctx.currentNode.choiceBlocks.Add(ctx.currentChoiceBlock);
-            BSDebug.Info($"[BubbleSpinner][ChoiceDebug] [{ctx.fileName}:{ctx.lineNumber}] Opened choice block in node '{ctx.currentNode.nodeName}' at pauseIndex {ctx.currentChoiceBlock.pauseIndex}");
-
             ctx.lastParsedWasTitle = false;
             return true;
         }
@@ -554,8 +552,6 @@ namespace BubbleSpinner.Core
                 ValidateAndAddChoice(ctx);
                 ctx.currentChoice = null;
             }
-
-            BSDebug.Info($"[BubbleSpinner][ChoiceDebug] [{ctx.fileName}:{ctx.lineNumber}] Closed choice block in node '{ctx.currentNode.nodeName}' with {ctx.currentChoiceBlock.choices.Count} choices at pauseIndex {ctx.currentChoiceBlock.pauseIndex}");
 
             ctx.inChoiceBlock = false;
             ctx.currentChoiceBlock = null;
@@ -610,7 +606,6 @@ namespace BubbleSpinner.Core
 
             ctx.currentChoice = new ChoiceData(choiceText, null);
             ctx.choiceJumpSeen = false;
-            BSDebug.Info($"[BubbleSpinner][ChoiceDebug] [{ctx.fileName}:{ctx.lineNumber}] Parsed choice option '{choiceText}' in node '{ctx.currentNode.nodeName}'");
 
             // Check for inline jump: -> "Text" <<jump NodeName>> or <<jump chapter:Ch2>>
             string afterQuote = remainder.Substring(closingQuote + 1).Trim();
@@ -906,7 +901,6 @@ namespace BubbleSpinner.Core
             }
 
             ctx.currentChoiceBlock.choices.Add(ctx.currentChoice);
-            BSDebug.Info($"[BubbleSpinner][ChoiceDebug] [{ctx.fileName}:{ctx.lineNumber}] Added choice '{ctx.currentChoice.choiceText}' to node '{ctx.currentNode.nodeName}' (preJumpMessages={ctx.currentChoice.preJumpMessages.Count}, hasJump={ctx.currentChoice.HasJump}, blockPauseIndex={ctx.currentChoiceBlock.pauseIndex})");
         }
 
         private static void FinalizeCurrentNode(ParserContext ctx, Dictionary<string, DialogueNode> nodes)
