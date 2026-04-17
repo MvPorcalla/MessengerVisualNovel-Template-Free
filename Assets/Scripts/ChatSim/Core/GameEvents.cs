@@ -41,7 +41,8 @@ namespace ChatSim.Core
         // SAVE/LOAD EVENTS
         // ════════════════════════════════════════════════════════════════
         
-        public static event Action OnNewGameStarted;
+        // dead code
+        // public static event Action OnNewGameStarted;
         public static event Action OnGameSaved;
         public static event Action OnGameLoaded;
         public static event Action OnSaveDeleted;
@@ -53,17 +54,22 @@ namespace ChatSim.Core
         public static event Action OnPhoneLocked;
         public static event Action OnPhoneUnlocked;
         public static event Action<string> OnAppOpened;     // appId
-        public static event Action<string> OnAppClosed;     // appId
+        // dead code
+        // public static event Action<string> OnAppClosed;     // appId
         
         // ════════════════════════════════════════════════════════════════
         // CONVERSATION EVENTS
         // ════════════════════════════════════════════════════════════════
         
         public static event Action<string> OnConversationStarted;       // conversationId
-        public static event Action<string> OnConversationUnlocked;      // conversationId
-        public static event Action<string, string> OnMessageReceived;   // conversationId, messageId
-        public static event Action<string, string> OnMessageSent;       // conversationId, messageId
-        public static event Action<string> OnConversationCompleted;     // conversationId
+        // dead code
+        // public static event Action<string> OnConversationUnlocked;      // conversationId
+        // dead code
+        // public static event Action<string, string> OnMessageReceived;   // conversationId, messageId
+        // dead code
+        // public static event Action<string, string> OnMessageSent;       // conversationId, messageId
+        // dead code
+        // public static event Action<string> OnConversationCompleted;     // conversationId
         
         // ════════════════════════════════════════════════════════════════
         // CG GALLERY EVENTS
@@ -75,15 +81,19 @@ namespace ChatSim.Core
         // NOTIFICATION EVENTS
         // ════════════════════════════════════════════════════════════════
         
-        public static event Action<string, string> OnNotificationReceived;  // appId, message
-        public static event Action OnNotificationCleared;
+        // dead code
+        // public static event Action<string, string> OnNotificationReceived;  // appId, message
+        // dead code
+        // public static event Action OnNotificationCleared;
         
         // ════════════════════════════════════════════════════════════════
         // CONTACT EVENTS
         // ════════════════════════════════════════════════════════════════
         
-        public static event Action<string> OnContactAdded;      // contactId
-        public static event Action<string> OnContactUpdated;    // contactId
+        // dead code
+        // public static event Action<string> OnContactAdded;      // contactId
+        // dead code
+        // public static event Action<string> OnContactUpdated;    // contactId
         public static event Action<string> OnCharacterStoryReset;   // conversationId
 
         // ════════════════════════════════════════════════════════════════════════
@@ -98,9 +108,12 @@ namespace ChatSim.Core
         // PROGRESSION EVENTS
         // ════════════════════════════════════════════════════════════════
         
-        public static event Action<string> OnStoryFlagSet;      // flagName
-        public static event Action<string> OnStoryFlagCleared;  // flagName
-        public static event Action<int> OnChapterUnlocked;      // chapterNumber
+        // dead code
+        // public static event Action<string> OnStoryFlagSet;      // flagName
+        // dead code
+        // public static event Action<string> OnStoryFlagCleared;  // flagName
+        // dead code
+        // public static event Action<int> OnChapterUnlocked;      // chapterNumber
         
         // ════════════════════════════════════════════════════════════════
         // EVENT LIFECYCLE MANAGEMENT
@@ -110,10 +123,12 @@ namespace ChatSim.Core
         {
             // Scene events
             OnSceneLoaded = null;
-            OnSceneChanging = null;
+            // dead code
+            // OnSceneChanging = null;
             
             // Save/Load events
-            OnNewGameStarted = null;
+            // dead code
+            // OnNewGameStarted = null;
             OnGameSaved = null;
             OnGameLoaded = null;
             OnSaveDeleted = null;
@@ -122,25 +137,34 @@ namespace ChatSim.Core
             OnPhoneLocked = null;
             OnPhoneUnlocked = null;
             OnAppOpened = null;
-            OnAppClosed = null;
+            // dead code
+            // OnAppClosed = null;
             
             // Conversation events
             OnConversationStarted = null;
-            OnConversationUnlocked = null;
-            OnMessageReceived = null;
-            OnMessageSent = null;
-            OnConversationCompleted = null;
+            // dead code
+            // OnConversationUnlocked = null;
+            // dead code
+            // OnMessageReceived = null;
+            // dead code
+            // OnMessageSent = null;
+            // dead code
+            // OnConversationCompleted = null;
             
             // CG events
             OnCGUnlocked = null;
             
             // Notification events
-            OnNotificationReceived = null;
-            OnNotificationCleared = null;
+            // dead code
+            // OnNotificationReceived = null;
+            // dead code
+            // OnNotificationCleared = null;
             
             // Contact events
-            OnContactAdded = null;
-            OnContactUpdated = null;
+            // dead code
+            // OnContactAdded = null;
+            // dead code
+            // OnContactUpdated = null;
 
             // Settings events
             OnTextSizeChanged = null;
@@ -148,9 +172,12 @@ namespace ChatSim.Core
             OnAllStoriesReset = null;
             
             // Progression events
-            OnStoryFlagSet = null;
-            OnStoryFlagCleared = null;
-            OnChapterUnlocked = null;
+            // dead code
+            // OnStoryFlagSet = null;
+            // dead code
+            // OnStoryFlagCleared = null;
+            // dead code
+            // OnChapterUnlocked = null;
 
             // Custom events
             OnCharacterStoryReset = null;
@@ -178,11 +205,12 @@ namespace ChatSim.Core
         // EVENT TRIGGERS - Save/Load
         // ════════════════════════════════════════════════════════════════
         
-        public static void TriggerNewGameStarted()
-        {
-            OnNewGameStarted?.Invoke();
-            Log("New game started");
-        }
+        // dead code
+        // public static void TriggerNewGameStarted()
+        // {
+        //     OnNewGameStarted?.Invoke();
+        //     Log("New game started");
+        // }
         
         public static void TriggerGameSaved()
         {
@@ -224,11 +252,12 @@ namespace ChatSim.Core
             Log($"App opened: {appId}");
         }
         
-        public static void TriggerAppClosed(string appId)
-        {
-            OnAppClosed?.Invoke(appId);
-            Log($"App closed: {appId}");
-        }
+        // dead code
+        // public static void TriggerAppClosed(string appId)
+        // {
+        //     OnAppClosed?.Invoke(appId);
+        //     Log($"App closed: {appId}");
+        // }
         
         // ════════════════════════════════════════════════════════════════
         // EVENT TRIGGERS - Conversations
@@ -240,29 +269,33 @@ namespace ChatSim.Core
             Log($"Conversation started: {conversationId}");
         }
         
-        public static void TriggerConversationUnlocked(string conversationId)
-        {
-            OnConversationUnlocked?.Invoke(conversationId);
-            Log($"Conversation unlocked: {conversationId}");
-        }
+        // dead code
+        // public static void TriggerConversationUnlocked(string conversationId)
+        // {
+        //     OnConversationUnlocked?.Invoke(conversationId);
+        //     Log($"Conversation unlocked: {conversationId}");
+        // }
         
-        public static void TriggerMessageReceived(string conversationId, string messageId)
-        {
-            OnMessageReceived?.Invoke(conversationId, messageId);
-            Log($"Message received: {conversationId}/{messageId}");
-        }
+        // dead code
+        // public static void TriggerMessageReceived(string conversationId, string messageId)
+        // {
+        //     OnMessageReceived?.Invoke(conversationId, messageId);
+        //     Log($"Message received: {conversationId}/{messageId}");
+        // }
         
-        public static void TriggerMessageSent(string conversationId, string messageId)
-        {
-            OnMessageSent?.Invoke(conversationId, messageId);
-            Log($"Message sent: {conversationId}/{messageId}");
-        }
+        // dead code
+        // public static void TriggerMessageSent(string conversationId, string messageId)
+        // {
+        //     OnMessageSent?.Invoke(conversationId, messageId);
+        //     Log($"Message sent: {conversationId}/{messageId}");
+        // }
         
-        public static void TriggerConversationCompleted(string conversationId)
-        {
-            OnConversationCompleted?.Invoke(conversationId);
-            Log($"Conversation completed: {conversationId}");
-        }
+        // dead code
+        // public static void TriggerConversationCompleted(string conversationId)
+        // {
+        //     OnConversationCompleted?.Invoke(conversationId);
+        //     Log($"Conversation completed: {conversationId}");
+        // }
         
         // ════════════════════════════════════════════════════════════════
         // EVENT TRIGGERS - CG Gallery
@@ -278,33 +311,37 @@ namespace ChatSim.Core
         // EVENT TRIGGERS - Notifications
         // ════════════════════════════════════════════════════════════════
         
-        public static void TriggerNotificationReceived(string appId, string message)
-        {
-            OnNotificationReceived?.Invoke(appId, message);
-            Log($"Notification: [{appId}] {message}");
-        }
+        // dead code
+        // public static void TriggerNotificationReceived(string appId, string message)
+        // {
+        //     OnNotificationReceived?.Invoke(appId, message);
+        //     Log($"Notification: [{appId}] {message}");
+        // }
         
-        public static void TriggerNotificationCleared()
-        {
-            OnNotificationCleared?.Invoke();
-            Log("Notifications cleared");
-        }
+        // dead code
+        // public static void TriggerNotificationCleared()
+        // {
+        //     OnNotificationCleared?.Invoke();
+        //     Log("Notifications cleared");
+        // }
         
         // ════════════════════════════════════════════════════════════════
         // EVENT TRIGGERS - Contacts
         // ════════════════════════════════════════════════════════════════
         
-        public static void TriggerContactAdded(string contactId)
-        {
-            OnContactAdded?.Invoke(contactId);
-            Log($"Contact added: {contactId}");
-        }
+        // dead code
+        // public static void TriggerContactAdded(string contactId)
+        // {
+        //     OnContactAdded?.Invoke(contactId);
+        //     Log($"Contact added: {contactId}");
+        // }
         
-        public static void TriggerContactUpdated(string contactId)
-        {
-            OnContactUpdated?.Invoke(contactId);
-            Log($"Contact updated: {contactId}");
-        }
+        // dead code
+        // public static void TriggerContactUpdated(string contactId)
+        // {
+        //     OnContactUpdated?.Invoke(contactId);
+        //     Log($"Contact updated: {contactId}");
+        // }
 
         public static void TriggerCharacterStoryReset(string conversationId)
         {
@@ -338,22 +375,25 @@ namespace ChatSim.Core
         // EVENT TRIGGERS - Progression
         // ════════════════════════════════════════════════════════════════
         
-        public static void TriggerStoryFlagSet(string flagName)
-        {
-            OnStoryFlagSet?.Invoke(flagName);
-            Log($"Story flag set: {flagName}");
-        }
+        // dead code
+        // public static void TriggerStoryFlagSet(string flagName)
+        // {
+        //     OnStoryFlagSet?.Invoke(flagName);
+        //     Log($"Story flag set: {flagName}");
+        // }
         
-        public static void TriggerStoryFlagCleared(string flagName)
-        {
-            OnStoryFlagCleared?.Invoke(flagName);
-            Log($"Story flag cleared: {flagName}");
-        }
+        // dead code
+        // public static void TriggerStoryFlagCleared(string flagName)
+        // {
+        //     OnStoryFlagCleared?.Invoke(flagName);
+        //     Log($"Story flag cleared: {flagName}");
+        // }
         
-        public static void TriggerChapterUnlocked(int chapterNumber)
-        {
-            OnChapterUnlocked?.Invoke(chapterNumber);
-            Log($"Chapter unlocked: {chapterNumber}");
-        }
+        // dead code
+        // public static void TriggerChapterUnlocked(int chapterNumber)
+        // {
+        //     OnChapterUnlocked?.Invoke(chapterNumber);
+        //     Log($"Chapter unlocked: {chapterNumber}");
+        // }
     }
 }
