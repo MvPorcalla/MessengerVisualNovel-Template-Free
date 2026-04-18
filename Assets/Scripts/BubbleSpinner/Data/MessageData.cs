@@ -144,8 +144,9 @@ namespace BubbleSpinner.Data
     public class ChoiceData
     {
         public string choiceText;
-        public JumpTarget jump;                 // replaces targetNode string
+        public JumpTarget jump;
         public List<MessageData> preJumpMessages;
+        public List<PausePoint> preJumpPausePoints;
 
         /// <summary>
         /// Initializes a choice with empty text, no jump target, and an empty pre-jump message list.
@@ -153,6 +154,7 @@ namespace BubbleSpinner.Data
         public ChoiceData()
         {
             preJumpMessages = new List<MessageData>();
+            preJumpPausePoints = new List<PausePoint>();
         }
 
         /// <summary>
@@ -163,17 +165,12 @@ namespace BubbleSpinner.Data
             choiceText      = text;
             jump            = jumpTarget;
             preJumpMessages = new List<MessageData>();
+            preJumpPausePoints = new List<PausePoint>();
         }
 
-        /// <summary>
-        /// Returns true if this choice has a valid jump destination.
-        /// </summary>
-        public bool HasJump => jump != null && jump.IsValid;
-
-        /// <summary>
-        /// Returns true if this choice has dialogue messages to display before jumping.
-        /// </summary>
+        public bool HasJump => jump != null && jump.IsValid; // must have a valid jump target to be actionable
         public bool HasPreJumpMessages => preJumpMessages != null && preJumpMessages.Count > 0;
+        public bool HasPreJumpPauses => preJumpPausePoints != null && preJumpPausePoints.Count > 0;
     }
 
     // ═══════════════════════════════════════════════════════════

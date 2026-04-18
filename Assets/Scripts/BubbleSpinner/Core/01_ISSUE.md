@@ -1,6 +1,3 @@
-One thing worth watching: MarkCurrentChoiceBlockResolved() is called at the top of OnChoiceSelected(), before pre-jump messages display. That means if the player exits mid-pre-jump-message, on resume the block is already marked resolved. For your current use case (fall-through with no save mid-animation) this is fine, but worth noting if you later add save points inside pre-jump sequences.
-
-
 ### 🔧 CODE REFACTOR PROMPT — SAFE & CONTEXT-AWARE
 
 You are reviewing my code for **refactoring only**, not rewriting.

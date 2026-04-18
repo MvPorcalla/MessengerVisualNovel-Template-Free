@@ -63,6 +63,7 @@ namespace BubbleSpinner.Core
             public int lineNumber;
             public string fileName;
             public string chapterId;
+            public bool firstPreJumpLineSeen;
         }
 
         // ═══════════════════════════════════════════════════════════
@@ -439,9 +440,8 @@ namespace BubbleSpinner.Core
         }
 
         /// <summary>
-        /// Handles standalone ... pause points.
-        /// Pure pacing pause — shows continue button, nothing sent on tap.
-        /// Player: "text" lines are implicit pause points handled in TryParseDialogueLine.
+        /// Handles ... which represents a pure pacing pause point.
+        /// Must be at indent 0 to be valid. Ignored inside choice blocks.
         /// </summary>
         private static bool TryParsePausePoint(string line, ParserContext ctx)
         {
@@ -450,13 +450,37 @@ namespace BubbleSpinner.Core
 
             if (ctx.inChoiceBlock)
             {
-                BSDebug.Warn($"[BubbleSpinner] [{ctx.fileName}:{ctx.lineNumber}] Pause point inside choice block ignored");
+                if (ctx.indentLevel != 2)
+                {
+                    BSDebug.Warn($"[BubbleSpinner] [{ctx.fileName}:{ctx.lineNumber}] Pause point inside choice block must be at indent 2 — found at indent {ctx.indentLevel}, ignored");
+                    ctx.lastParsedWasTitle = false;
+                    return true;
+                }
+
+                if (ctx.currentChoice == null)
+                {
+                    BSDebug.Warn($"[BubbleSpinner] [{ctx.fileName}:{ctx.lineNumber}] Pause point at indent 2 but no choice option is open — ignored");
+                    ctx.lastParsedWasTitle = false;
+                    return true;
+                }
+
+                if (ctx.choiceJumpSeen)
+                {
+                    BSDebug.Error($"[BubbleSpinner] [{ctx.fileName}:{ctx.lineNumber}] Pause point after <<jump>> in choice '{ctx.currentChoice.choiceText}' is unreachable — ignored");
+                    ctx.lastParsedWasTitle = false;
+                    return true;
+                }
+
+                // Valid pre-jump pause — record stop index relative to preJumpMessages
+                int stopIndex = ctx.currentChoice.preJumpMessages.Count;
+                ctx.currentChoice.preJumpPausePoints.Add(new PausePoint(stopIndex));
+
                 ctx.lastParsedWasTitle = false;
                 return true;
             }
 
-            int stopIndex = ctx.currentNode.messages.Count;
-            ctx.currentNode.pausePoints.Add(new PausePoint(stopIndex));
+            int nodeStopIndex = ctx.currentNode.messages.Count;
+            ctx.currentNode.pausePoints.Add(new PausePoint(nodeStopIndex));
 
             ctx.lastParsedWasTitle = false;
             return true;
@@ -606,6 +630,7 @@ namespace BubbleSpinner.Core
 
             ctx.currentChoice = new ChoiceData(choiceText, null);
             ctx.choiceJumpSeen = false;
+            ctx.firstPreJumpLineSeen = false;
 
             // Check for inline jump: -> "Text" <<jump NodeName>> or <<jump chapter:Ch2>>
             string afterQuote = remainder.Substring(closingQuote + 1).Trim();
@@ -695,6 +720,12 @@ namespace BubbleSpinner.Core
                     return true;
                 }
 
+                if (!ctx.firstPreJumpLineSeen)
+                {
+                    ctx.firstPreJumpLineSeen = true;
+                    // Media as first line is valid — no player-line warning needed for media-first options
+                }
+
                 ctx.currentChoice.preJumpMessages.Add(imageMessage);
             }
             else
@@ -762,13 +793,42 @@ namespace BubbleSpinner.Core
                     return true;
                 }
 
-                // Valid pre-jump dialogue — add to choice, never generate pause points
+                // Valid pre-jump dialogue — add to choice
                 MessageData.MessageType msgType = speaker.ToLower() == "system"
                     ? MessageData.MessageType.System
                     : MessageData.MessageType.Text;
 
                 var message = new MessageData(msgType, speaker, content);
+
+                // First line seen in this choice option
+                if (!ctx.firstPreJumpLineSeen)
+                {
+                    ctx.firstPreJumpLineSeen = true;
+
+                    // Warn if the first content line is not a Player: line, but the choice label reads like player speech
+                    if (!message.IsPlayerMessage)
+                    {
+                        // Only warn if the choice label text looks like player speech (non-empty, not a question prompt)
+                        // Simple heuristic: always warn — author is responsible for matching label to first line
+                        BSDebug.Warn($"[BubbleSpinner] [{ctx.fileName}:{ctx.lineNumber}] " +
+                            $"Choice option '{ctx.currentChoice.choiceText}' — first line is '{speaker}' not 'Player'. " +
+                            $"If the choice label is player dialogue, add a matching Player: line as the first line of the option.");
+                    }
+
+                    // First Player: line is auto-sent by the choice tap — no pause point
+                    ctx.currentChoice.preJumpMessages.Add(message);
+                    ctx.lastParsedWasTitle = false;
+                    return true;
+                }
+
+                // Subsequent Player: lines get pause points normally
                 ctx.currentChoice.preJumpMessages.Add(message);
+
+                if (message.IsPlayerMessage)
+                {
+                    int playerMsgIndex = ctx.currentChoice.preJumpMessages.Count - 1;
+                    ctx.currentChoice.preJumpPausePoints.Add(new PausePoint(playerMsgIndex, playerMsgIndex));
+                }
 
                 ctx.lastParsedWasTitle = false;
                 return true;

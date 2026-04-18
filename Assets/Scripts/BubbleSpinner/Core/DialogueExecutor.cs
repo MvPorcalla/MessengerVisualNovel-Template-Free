@@ -46,7 +46,8 @@ namespace BubbleSpinner.Core
         private int pendingNextMessageIndex = -1;
 
         private bool pendingProcessAfterPlayerMessage = false;
-        private ChoiceData pendingChoiceJump = null;
+        private int pendingPreJumpMessageIndex = 0;  // tracks progress through preJumpMessages
+        private ChoiceData activePreJumpChoice = null; // the choice currently being played back
 
         // ═══════════════════════════════════════════════════════════
         // EVENTS
@@ -157,7 +158,6 @@ namespace BubbleSpinner.Core
                     var choiceBlock = GetPendingChoiceBlockAtCurrentIndex();
                     if (choiceBlock != null)
                     {
-                        BSDebug.Info($"[DialogueExecutor][ChoiceDebug] ResumeTarget.Choices at node '{state.currentNodeName}', messageIndex={state.currentMessageIndex}, blockId='{choiceBlock.blockId}', choices={choiceBlock.choices.Count}");
                         if (PlayerMessageBeforeChoiceWasSent(choiceBlock))
                             OnChoicesReady?.Invoke(choiceBlock.choices);
                         else
@@ -190,6 +190,16 @@ namespace BubbleSpinner.Core
         /// </summary>
         public void OnPauseButtonClicked()
         {
+
+            // Pre-jump pause — resume pre-jump sequence, not node sequence
+            if (activePreJumpChoice != null)
+            {
+                state.isInPauseState = false;
+                state.resumeTarget   = ResumeTarget.None;
+                ProcessPreJumpMessages();
+                return;
+            }
+            
             state.isInPauseState = false;
             state.resumeTarget   = ResumeTarget.None;
 
@@ -239,7 +249,6 @@ namespace BubbleSpinner.Core
         public void OnChoiceSelected(ChoiceData choice)
         {
             BSDebug.Info($"[DialogueExecutor] Choice selected: {choice.choiceText}");
-            BSDebug.Info($"[DialogueExecutor][ChoiceDebug] OnChoiceSelected node='{state.currentNodeName}', messageIndex={state.currentMessageIndex}, hasJump={choice.HasJump}, preJumpMessages={choice.preJumpMessages.Count}");
 
             state.isInPauseState = false;
             state.resumeTarget   = ResumeTarget.None;
@@ -248,15 +257,9 @@ namespace BubbleSpinner.Core
 
             if (choice.HasPreJumpMessages)
             {
-                pendingChoiceJump = choice;
-                BSDebug.Info($"[DialogueExecutor][ChoiceDebug] Staging {choice.preJumpMessages.Count} pre-jump messages for choice '{choice.choiceText}'");
-
-                // Stage pre-jump messages in the pending buffer.
-                pendingDisplayMessages.Clear();
-                pendingDisplayMessages.AddRange(choice.preJumpMessages);
-                pendingNextMessageIndex = -1; // chapter/node index managed by ExecuteJump
-
-                OnMessagesReady?.Invoke(new List<MessageData>(choice.preJumpMessages));
+                activePreJumpChoice = choice;
+                pendingPreJumpMessageIndex = 0;
+                ProcessPreJumpMessages();
                 return;
             }
 
@@ -265,7 +268,6 @@ namespace BubbleSpinner.Core
             else
             {
                 BSDebug.Info("[DialogueExecutor] Fall-through choice — continuing node");
-                BSDebug.Info($"[DialogueExecutor][ChoiceDebug] Fall-through continuing from node='{state.currentNodeName}', currentMessageIndex={state.currentMessageIndex}");
                 ProcessCurrentNode();
             }
         }
@@ -277,7 +279,9 @@ namespace BubbleSpinner.Core
         public void OnMessagesDisplayComplete()
         {
             // ── Commit the pending batch to state ──────────────────
-            if (pendingDisplayMessages.Count > 0)
+            int committedCount = pendingDisplayMessages.Count;
+
+            if (committedCount > 0)
             {
                 foreach (var message in pendingDisplayMessages)
                 {
@@ -297,16 +301,29 @@ namespace BubbleSpinner.Core
             }
 
             // ── Route to next action ───────────────────────────────
-            if (pendingChoiceJump != null)
+            if (activePreJumpChoice != null)
             {
-                var choice    = pendingChoiceJump;
-                pendingChoiceJump = null;
-                BSDebug.Info($"[DialogueExecutor][ChoiceDebug] OnMessagesDisplayComplete resolving pending choice '{choice.choiceText}' with hasJump={choice.HasJump}");
+                pendingPreJumpMessageIndex += committedCount;
 
-                if (choice.HasJump)
-                    ExecuteJump(choice.jump);
+                var choice = activePreJumpChoice;
+                int nextIndex = pendingPreJumpMessageIndex;
+
+                if (nextIndex < choice.preJumpMessages.Count)
+                {
+                    var nextPause = choice.preJumpPausePoints.Find(p => p.stopIndex == nextIndex);
+                    if (nextPause != null)
+                    {
+                        state.isInPauseState = true;
+                        state.resumeTarget   = ResumeTarget.Pause;
+                        OnPauseReached?.Invoke();
+                        return;
+                    }
+                    ProcessPreJumpMessages();
+                }
                 else
-                    ProcessCurrentNode();
+                {
+                    OnPreJumpMessagesComplete();
+                }
                 return;
             }
 
@@ -338,7 +355,6 @@ namespace BubbleSpinner.Core
             }
 
             var messagesToShow = GetUnreadMessagesToNextStop();
-            BSDebug.Info($"[DialogueExecutor][ChoiceDebug] ProcessCurrentNode node='{state.currentNodeName}', currentMessageIndex={state.currentMessageIndex}, unreadToNextStop={messagesToShow.Count}, nextStopIndex={GetEndIndexForNextStop()}");
 
             if (messagesToShow.Count > 0)
             {
@@ -353,6 +369,46 @@ namespace BubbleSpinner.Core
             {
                 DetermineNextAction();
             }
+        }
+
+        private void ProcessPreJumpMessages()
+        {
+            var choice = activePreJumpChoice;
+            int start  = pendingPreJumpMessageIndex;
+            int end    = choice.preJumpMessages.Count;
+
+            // Find the next pause stop
+            foreach (var pause in choice.preJumpPausePoints)
+            {
+                if (pause.stopIndex > start)
+                {
+                    end = pause.stopIndex;
+                    break;
+                }
+            }
+
+            var batch = choice.preJumpMessages.GetRange(start, end - start);
+
+            pendingDisplayMessages.Clear();
+            pendingDisplayMessages.AddRange(batch);
+            pendingNextMessageIndex = -1;
+
+            if (batch.Count > 0)
+                OnMessagesReady?.Invoke(new List<MessageData>(batch));
+            else
+                OnPreJumpMessagesComplete();
+        }
+
+        private void OnPreJumpMessagesComplete()
+        {
+            var choice = activePreJumpChoice;
+            activePreJumpChoice        = null;
+            pendingPreJumpMessageIndex = 0;
+
+            if (choice.HasJump)
+                ExecuteJump(choice.jump);
+            else
+                ProcessCurrentNode();
         }
 
         private bool HasContentAfterPause(PausePoint pausePoint)
@@ -379,7 +435,6 @@ namespace BubbleSpinner.Core
             var choiceBlock = GetPendingChoiceBlockAtCurrentIndex();
             if (choiceBlock != null)
             {
-                BSDebug.Info($"[DialogueExecutor][ChoiceDebug] DetermineNextAction found choice block '{choiceBlock.blockId}' at node='{state.currentNodeName}', messageIndex={state.currentMessageIndex}, choices={choiceBlock.choices.Count}");
                 state.isInPauseState = false;
                 state.resumeTarget   = ResumeTarget.Choices;
                 OnChoicesReady?.Invoke(choiceBlock.choices);
@@ -417,7 +472,6 @@ namespace BubbleSpinner.Core
             var choiceBlock = GetPendingChoiceBlockAtCurrentIndex();
             if (choiceBlock != null)
             {
-                BSDebug.Info($"[DialogueExecutor][ChoiceDebug] DetermineNextActionSkipPause found choice block '{choiceBlock.blockId}' at node='{state.currentNodeName}', messageIndex={state.currentMessageIndex}, choices={choiceBlock.choices.Count}");
                 state.resumeTarget = ResumeTarget.Choices;
                 OnChoicesReady?.Invoke(choiceBlock.choices);
                 return;
@@ -559,10 +613,9 @@ namespace BubbleSpinner.Core
         }
 
         /// <summary>
-        /// Returns the next execution boundary from the given index.
-        /// Boundaries include both pause points and unresolved choice blocks.
-        /// Without this, message batching can skip past an earlier choice block
-        /// and only stop when a later pause or later choice is reached.
+        /// Determines the next message index at which execution should pause, 
+        /// either for a regular pause point or a pending choice block. 
+        /// Returns the smaller of the two indices.
         /// </summary>
         private int GetEndIndexForNextStop(int fromIndex = -1)
         {
@@ -577,9 +630,6 @@ namespace BubbleSpinner.Core
                 if (block.pauseIndex >= startFrom && block.pauseIndex < endIndex)
                     endIndex = block.pauseIndex;
             }
-
-            BSDebug.Info($"[DialogueExecutor][ChoiceDebug] GetEndIndexForNextStop node='{state.currentNodeName}', startFrom={startFrom}, endIndex={endIndex}, unresolvedBlocks={DescribeChoiceBlocks()}");
-
             return endIndex;
         }
 
@@ -685,7 +735,6 @@ namespace BubbleSpinner.Core
         private ChoiceBlock GetPendingChoiceBlockAtCurrentIndex()
         {
             var block = currentNode.GetChoiceBlockAt(state.currentMessageIndex);
-            BSDebug.Info($"[DialogueExecutor][ChoiceDebug] GetPendingChoiceBlockAtCurrentIndex node='{state.currentNodeName}', messageIndex={state.currentMessageIndex}, rawBlock={(block == null ? "<none>" : block.blockId)}, resolved={IsChoiceBlockResolved(block)}");
             return IsChoiceBlockResolved(block) ? null : block;
         }
 
@@ -702,18 +751,12 @@ namespace BubbleSpinner.Core
             var block = currentNode.GetChoiceBlockAt(state.currentMessageIndex);
             if (block == null || string.IsNullOrEmpty(block.blockId))
             {
-                BSDebug.Warn($"[DialogueExecutor][ChoiceDebug] MarkCurrentChoiceBlockResolved found no block at node='{state.currentNodeName}', messageIndex={state.currentMessageIndex}");
                 return;
             }
 
             if (!state.resolvedChoiceBlockIds.Contains(block.blockId))
             {
                 state.resolvedChoiceBlockIds.Add(block.blockId);
-                BSDebug.Info($"[DialogueExecutor][ChoiceDebug] Resolved block '{block.blockId}' at node='{state.currentNodeName}', messageIndex={state.currentMessageIndex}. ResolvedNow=[{string.Join(", ", state.resolvedChoiceBlockIds)}]");
-            }
-            else
-            {
-                BSDebug.Info($"[DialogueExecutor][ChoiceDebug] Block '{block.blockId}' was already resolved. ResolvedNow=[{string.Join(", ", state.resolvedChoiceBlockIds)}]");
             }
         }
 
