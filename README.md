@@ -1,6 +1,6 @@
 # BubbleSpinner — Messenger Style Visual Novel Template for Unity
 
-![Unity](https://img.shields.io/badge/Unity-2022.3.62f2_LTS-black?logo=unity) ![Platform](https://img.shields.io/badge/Platform-Mobile-brightgreen) ![License](https://img.shields.io/badge/License-MIT-blue) ![Status](https://img.shields.io/badge/Status-Active_Development-orange)
+![Unity](https://img.shields.io/badge/Unity-2022.3.62f2_LTS-black?logo=unity) ![Platform](https://img.shields.io/badge/Platform-Mobile-brightgreen) ![License](https://img.shields.io/badge/ChatSim-Free_to_Use-brightgreen) ![License](https://img.shields.io/badge/BubbleSpinner-Restricted-red) ![Status](https://img.shields.io/badge/Status-Active_Development-orange)
 
 A modular **Unity template** for building **narrative-driven mobile games** with a **phone chat messenger interface.**
 
