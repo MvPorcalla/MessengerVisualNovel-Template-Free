@@ -41,7 +41,12 @@ Built on **BubbleSpinner** — a standalone, data-driven dialogue engine that ha
 
 - Some edge cases or bugs may still exist that have not yet been discovered or resolved.  
 - Due to ongoing development, certain fixes may introduce unintended side effects in other flows.  
-- If you encounter any issues, feedback or reports are highly appreciated and help improve system stability.
+- If you encounter any issues, feedback or reports are highly appreciated and help improve system stability.  
+
+### 📌 Notes
+
+- Potential leftover dead code may still exist from previous cleanup.  
+- ⚠️ Some DRY violations exist in the codebase due to rapid iteration and postponed refactoring. These areas are known and planned for future cleanup.  
 
 ---
 

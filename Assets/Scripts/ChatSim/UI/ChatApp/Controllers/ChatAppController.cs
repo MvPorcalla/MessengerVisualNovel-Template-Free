@@ -500,26 +500,6 @@ namespace ChatSim.UI.ChatApp.Controllers
         // ═══════════════════════════════════════════════════════════
         // ░ CHAPTER NAVIGATION
         // ═══════════════════════════════════════════════════════════
-
-        // DEAD CODE — no caller found in provided scripts; original implementation used a "Continue to Next Chapter" button that was removed in favor of <<jump>> tags in .bub files
-        /// <summary>
-        /// Handle "Continue to Next Chapter" button click - advances to next chapter in current conversation
-        /// </summary>
-        // private void OnContinueToNextChapterClicked()
-        // {
-        //     _log.Info("Continue to next chapter clicked");
-
-        //     if (currentExecutor == null)
-        //     {
-        //         _log.Error("Cannot advance chapter - no active executor");
-        //         return;
-        //     }
-
-        //     choiceDisplay.ClearChoices();
-
-        //     // DEAD CODE — AdvanceToNextChapter() removed; HasMoreChapters is always false so this is never reached
-        //     // currentExecutor.AdvanceToNextChapter();
-        // }
         
         /// <summary>
         /// Handle "Return to Contacts" button click

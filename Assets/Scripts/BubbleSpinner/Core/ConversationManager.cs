@@ -261,51 +261,6 @@ namespace BubbleSpinner.Core
         }
 
         // ═══════════════════════════════════════════════════════════
-        // CG GALLERY API
-        // ═══════════════════════════════════════════════════════════
-
-        // DEAD CODE — no callers found in provided scripts; gallery reads CGs from SaveData directly
-        /// <summary>
-        /// Gets all unlocked CGs for a specific conversation.
-        /// </summary>
-        // public List<string> GetUnlockedCGs(string conversationId)
-        // {
-        //     if (activeSessions.TryGetValue(conversationId, out var session))
-        //         return session.state?.unlockedCGs ?? new List<string>();
-
-        //     return new List<string>();
-        // }
-
-        // DEAD CODE — no caller found in provided scripts; gallery reads CGs from SaveData directly
-        /// <summary>
-        /// Gets all unlocked CGs across all conversations.
-        /// </summary>
-        // public List<string> GetAllUnlockedCGs()
-        // {
-        //     var allCGs = new List<string>();
-
-        //     foreach (var kvp in activeSessions)
-        //     {
-        //         if (kvp.Value.state?.unlockedCGs != null)
-        //             allCGs.AddRange(kvp.Value.state.unlockedCGs);
-        //     }
-
-        //     return allCGs;
-        // }
-
-        // DEAD CODE — no caller found in provided scripts; gallery reads CGs from SaveData directly
-        /// <summary>
-        /// Checks if a specific CG is unlocked in a conversation.
-        /// </summary>
-        // public bool IsCGUnlocked(string conversationId, string cgPath)
-        // {
-        //     if (activeSessions.TryGetValue(conversationId, out var session))
-        //         return session.state?.unlockedCGs?.Contains(cgPath) ?? false;
-
-        //     return false;
-        // }
-
-        // ═══════════════════════════════════════════════════════════
         // EVENT SUBSCRIPTIONS (for auto-save)
         // ═══════════════════════════════════════════════════════════
 

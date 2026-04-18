@@ -68,9 +68,6 @@ namespace BubbleSpinner.Core
         public int CurrentMessageIndex => state?.currentMessageIndex ?? 0;
         public ConversationState GetState() => state;
 
-        // DEAD CODE — no caller found in provided scripts; original implementation used a "Continue to Next Chapter" button that was removed in favor of <<jump>> tags in .bub files
-        // public bool HasMoreChapters => false;
-
         // ═══════════════════════════════════════════════════════════
         // INITIALIZATION
         // ═══════════════════════════════════════════════════════════
@@ -337,12 +334,6 @@ namespace BubbleSpinner.Core
             DetermineNextAction();
         }
 
-        // DEAD CODE — only reachable via OnContinueToNextChapterClicked, which requires
-        // public void AdvanceToNextChapter()
-        // {
-        //     BSDebug.Warn("[DialogueExecutor] AdvanceToNextChapter() called — use <<jump ChapterId>> in your .bub file instead.");
-        // }
-
         // ═══════════════════════════════════════════════════════════
         // CORE PROCESSING LOGIC
         // ═══════════════════════════════════════════════════════════
@@ -467,45 +458,6 @@ namespace BubbleSpinner.Core
             state.resumeTarget   = ResumeTarget.End;
             OnConversationEnd?.Invoke();
         }
-
-        // DEAD CODE (likely)
-        //
-        // DetermineNextActionSkipPause is a reduced version of DetermineNextAction()
-        // that skips pause handling and only resolves choices, jumps, or end.
-        //
-        // This was originally introduced to handle interruption cases where the UI
-        // exited mid-message and we wanted to avoid re-triggering pause logic on resume.
-        //
-        // With the current pending message buffer system, interruptions are handled
-        // by re-firing pending messages and resuming the normal execution flow via
-        // ProcessCurrentNode(), making this separate "skip pause" path unnecessary.
-        //
-        // Keeping this method can cause incorrect behavior, such as:
-        // - Resuming mid-message and immediately resolving to End
-        // - Skipping remaining messages or pauses unintentionally
-        //
-        // If no other call sites require bypassing pause logic explicitly,
-        // this method can be safely removed.
-        // private void DetermineNextActionSkipPause()
-        // {
-        //     var choiceBlock = GetPendingChoiceBlockAtCurrentIndex();
-        //     if (choiceBlock != null)
-        //     {
-        //         state.resumeTarget = ResumeTarget.Choices;
-        //         OnChoicesReady?.Invoke(choiceBlock.choices);
-        //         return;
-        //     }
-
-        //     if (currentNode.jump != null && currentNode.jump.IsValid)
-        //     {
-        //         state.resumeTarget = ResumeTarget.None;
-        //         ExecuteJump(currentNode.jump);
-        //         return;
-        //     }
-
-        //     state.resumeTarget = ResumeTarget.End;
-        //     OnConversationEnd?.Invoke();
-        // }
 
         // ═══════════════════════════════════════════════════════════
         // NODE NAVIGATION
@@ -778,23 +730,6 @@ namespace BubbleSpinner.Core
                 state.resolvedChoiceBlockIds.Add(block.blockId);
             }
         }
-
-        // DEAD CODE — private debug helper, never called within DialogueExecutor
-        // private string DescribeChoiceBlocks()
-        // {
-        //     if (currentNode == null || currentNode.choiceBlocks == null || currentNode.choiceBlocks.Count == 0)
-        //         return "<none>";
-
-        //     var describedBlocks = new List<string>();
-        //     foreach (var block in currentNode.choiceBlocks)
-        //     {
-        //         string blockId = string.IsNullOrEmpty(block.blockId) ? "<no-id>" : block.blockId;
-        //         string stateLabel = IsChoiceBlockResolved(block) ? "resolved" : "pending";
-        //         describedBlocks.Add($"{blockId}@{block.pauseIndex}:{stateLabel}");
-        //     }
-
-        //     return string.Join(", ", describedBlocks);
-        // }
 
         private string GetFirstNodeName()
         {
