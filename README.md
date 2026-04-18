@@ -1,4 +1,4 @@
-# BubbleSpinner — Messenger Style Visual Novel Template for Unity
+# Messenger Style Visual Novel Template for Unity (Limited Feature)
 
 ![Unity](https://img.shields.io/badge/Unity-2022.3.62f2_LTS-black?logo=unity) ![Platform](https://img.shields.io/badge/Platform-Mobile-brightgreen) ![License](https://img.shields.io/badge/ChatSim-Free_to_Use-brightgreen) ![License](https://img.shields.io/badge/BubbleSpinner-Restricted-red) ![Status](https://img.shields.io/badge/Status-Active_Development-orange)
 
